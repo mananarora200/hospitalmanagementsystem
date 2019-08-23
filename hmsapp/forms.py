@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
+from .models import UserHistory
 CHOICES= [
     ('male', 'Male'),
     ('female', 'Female'),
@@ -8,7 +10,7 @@ CHOICES= [
     
     ]
 class UserLoginForm(forms.Form):
-     username=forms.CharField(max_length=20,label='phone no')
+     username=forms.CharField(max_length=20,label='Phone Number')
      password=forms.CharField(max_length=100,widget=forms.PasswordInput)
       
            
@@ -27,4 +29,33 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['first_name','last_name','username','birth_date', 'password1', 'password2','gender','city','email' ]
 
+
+class HistoryForm(forms.ModelForm):
+    choices1 = [
+    ('never', 'Never'),
+    ('once an year', 'Once an year'),
+    ('few times a year', 'Few times a year'),
+    ('few times a month', 'Few times a month'),
+    ('few times a week', 'Few times a week'),
+    ('daily', 'daily'),
+    ('many times a day', 'Many times a day'),    
+    ]
+    choices2 = [
+    ('yes', 'Yes'),
+    ('no', 'No'),
+    ]
+    diabetes=forms.CharField(max_length=100,label='Do you have Diabetes?', widget=forms.RadioSelect(choices=choices2))
+    blood_pressure=forms.CharField(max_length=100,label='Do you have Blood Pressure Problems?', widget=forms.RadioSelect(choices=choices2))
+    heart_problems=forms.CharField(max_length=100,label='Do you have have Heart Problems?', widget=forms.RadioSelect(choices=choices2))
+    drink=forms.CharField(max_length=100,label='How often do you have alcohol?', widget=forms.RadioSelect(choices=choices1))
+    smoke=forms.CharField(max_length=100,label='How often do you smoke?', widget=forms.RadioSelect(choices=choices1))
+    drugs=forms.CharField(max_length=100,label='How often do you have drugs?', widget=forms.RadioSelect(choices=choices1))
+    class Meta:
+        model = UserHistory
+        fields = ["diabetes",
+        "blood_pressure",
+        "heart_problems",
+        "drink",
+        "smoke",
+        "drugs",]
 

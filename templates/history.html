@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Patient History</title>
+{% endblock %}
+
+{% block body %}
+<form class="container" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-default">
+</form>
+
+{% endblock %}
