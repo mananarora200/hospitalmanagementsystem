@@ -30,7 +30,7 @@ def login_request(request):
     else:
         form=UserLoginForm()
     return render(request,"login.html",context={'form':form})
-#just a comment
+
 def logout_request(request):
     logout(request)
     messages.info(request,"Logged out succesfully")
