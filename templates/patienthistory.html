@@ -5,11 +5,17 @@
 {% endblock %}
 
 {% block body %}
-<h2 class="container">{{ diabetes }}</h2>
-<h2 class="container">{{ bp }}</h2>
-<h2 class="container">{{ hp }}</h2>
-<h2 class="container">{{ drink }}</h2>
-<h2 class="container">{{ smoke }}</h2>
-<h2 class="container">{{ drugs }}</h2>
+<h2 class="container">Question: Do you have diabetes?</h2>
+<h2 class="container">You Answered: {{ diabetes }}</h2>
+<h2 class="container">Question: Do you have Blood Pressure Problems?</h2>
+<h2 class="container">You Answered: {{ bp }}</h2>
+<h2 class="container">Question: Do you have Heart Problems?</h2>
+<h2 class="container">You Answered: {{ hp }}</h2>
+<h2 class="container">Question: How often do you drink?</h2>
+<h2 class="container">You Answered: {{ drink }}</h2>
+<h2 class="container">Question: How often do you smoke?</h2>
+<h2 class="container">You Answered: {{ smoke }}</h2>
+<h2 class="container">Question: How often do you take drugs?</h2>
+<h2 class="container">You Answered: {{ drugs }}</h2>
 
 {% endblock %}
