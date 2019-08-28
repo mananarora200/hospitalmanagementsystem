@@ -4,12 +4,22 @@ from .forms import SignUpForm,UserLoginForm, HistoryForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import UserProfile
+from .models import UserProfile, UserHistory
 # Create your views here.
 @login_required
 def homepage(request):
     return render(request,'home.html')
     
+@login_required
+def showpatienthistory(request):
+    data = UserHistory.objects.get(user = request.user)
+    args = {"diabetes":data.diabetes,
+    "bp":data.blood_pressure,
+    "hp":data.heart_problems,
+    "drink":data.drink,
+    "smoke":data.smoke,
+    "drugs":data.drugs}
+    return render(request,"patienthistory.html", context=args)
 
 def login_request(request):
     if request.method=='POST':
