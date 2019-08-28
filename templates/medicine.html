@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Medicine</title>
+{% endblock %}
+
+{% block body %}
+{% for medicines in all_objects %}
+{{ medicines.medicines }}
+{{ medicines.price }}
+
+{% endfor %}
+
+{% endblock %}

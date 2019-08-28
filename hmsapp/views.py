@@ -4,7 +4,7 @@ from .forms import SignUpForm,UserLoginForm, HistoryForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import UserProfile, UserHistory
+from .models import UserProfile, UserHistory,Labs,Medic
 # Create your views here.
 @login_required
 def homepage(request):
@@ -78,6 +78,17 @@ def userhistory(request):
     else:
         form = HistoryForm()
     return render(request,'history.html',context={'form':form})                    
+def medicine(request):
+    all_objects=Medic.objects.all()
 
+    context= {'all_objects':all_objects}
+
+    return render(request,'medicine.html',context)
+def test(request):
+    all_objects=Labs.objects.all()
+
+    context= {'all_objects':all_objects}
+
+    return render(request,'lab.html',context)
 
                  

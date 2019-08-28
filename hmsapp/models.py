@@ -30,3 +30,44 @@ class UserHistory(models.Model):
     drugs = models.CharField(max_length = 100)
     def __str__(self):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)
+
+class Visits(models.Model):
+    visit_id=models.IntegerField()
+    medicine=models.CharField(max_length=50)
+    proress=models.CharField(max_length=20)
+    Date=models.DateField()
+    test=models.CharField(max_length=50)
+    time=models.IntegerField()
+    temperature=models.IntegerField()
+    bp=models.IntegerField()
+    symptoms=models.CharField(max_length=60)
+    disease=models.CharField(max_length=30)
+    def __str__(self):
+        return self.visit_id
+
+class Medic(models.Model):
+    visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
+    medicines=models.CharField(max_length=50)
+    price=models.CharField(max_length=10)
+    def __str__(self):
+        return self.medicines
+
+class Labs(models.Model):
+    visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
+    test=models.CharField(max_length=50)
+    price=models.CharField(max_length=10)
+    def __str__(self):
+        return self.test
+
+class Case(models.Model):
+    symptoms=models.CharField(max_length=60)
+    disease=models.CharField(max_length=30)
+    starting_date=models.DateField()
+    last_visit=models.DateField()
+    def __str__(self):
+        return self.last_visit
+
+
+
+
+

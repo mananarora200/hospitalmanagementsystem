@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Test</title>
+{% endblock %}
+
+{% block body %}
+{% for test in all_objects %}
+{{ test.test }}
+{{ test.price }}
+
+{% endfor %}
+
+{% endblock %}
