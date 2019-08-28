@@ -71,7 +71,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hms.wsgi.application'
 
 LOGIN_URL = "/login"
-LOGIN_REDIRECT_URL = "/login"
+
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -79,9 +79,9 @@ LOGIN_REDIRECT_URL = "/login"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'HMS',
+        'NAME': 'hms',
         'USER': 'postgres',
-        'PASSWORD': '7878',
+        'PASSWORD': 'qwertyuiop',
         'HOST': 'localhost',
         'PORT': '5432',
     }
