@@ -5,10 +5,12 @@
 {% endblock %}
 
 {% block body %}
-{% for medicines in all_objects %}
-{{ medicines.medicines }}
-{{ medicines.price }}
+{% for Medicine in data %}
+{{ Medicine.price }}
 
+{{ Medicine.medicines}}
+<br>
 {% endfor %}
+
 
 {% endblock %}

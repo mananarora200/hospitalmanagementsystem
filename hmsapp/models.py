@@ -34,7 +34,7 @@ class UserHistory(models.Model):
 class Visits(models.Model):
     visit_id=models.IntegerField()
     medicine=models.CharField(max_length=50)
-    proress=models.CharField(max_length=20)
+    progress=models.CharField(max_length=20)
     Date=models.DateField()
     test=models.CharField(max_length=50)
     time=models.IntegerField()
@@ -43,9 +43,10 @@ class Visits(models.Model):
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30)
     def __str__(self):
-        return self.visit_id
+        return self.progress
 
 class Medic(models.Model):
+    
     visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
     medicines=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
@@ -53,6 +54,7 @@ class Medic(models.Model):
         return self.medicines
 
 class Labs(models.Model):
+
     visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
     test=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
@@ -60,12 +62,13 @@ class Labs(models.Model):
         return self.test
 
 class Case(models.Model):
+    user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30)
     starting_date=models.DateField()
     last_visit=models.DateField()
     def __str__(self):
-        return self.last_visit
+        return str(self.user.first_name)+"\t"+str(self.last_visit)
 
 
 

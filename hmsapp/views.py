@@ -77,17 +77,20 @@ def userhistory(request):
             return HttpResponseRedirect('/')
     else:
         form = HistoryForm()
-    return render(request,'history.html',context={'form':form})                    
+    return render(request,'history.html',context={'form':form})
+@login_required                    
 def medicine(request):
-    all_objects=Medic.objects.all()
+    data=Medic.objects.all()
 
-    context= {'all_objects':all_objects}
+    context= {'data':data}
 
     return render(request,'medicine.html',context)
+@login_required    
 def test(request):
-    all_objects=Labs.objects.all()
+    data=Labs.objects.get(user=request.user)
 
-    context= {'all_objects':all_objects}
+    context= {'test':data.test,
+    'price':data.price}
 
     return render(request,'lab.html',context)
 
