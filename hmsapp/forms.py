@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import UserHistory
+from .models import UserHistory,Case,Visits
 CHOICES= [
     ('male', 'Male'),
     ('female', 'Female'),
@@ -58,4 +58,9 @@ class HistoryForm(forms.ModelForm):
         "drink",
         "smoke",
         "drugs",]
+
+class CreateCase(ModelForm):
+    class Meta:
+        model = Case
+        fields = ['symptoms',]
 

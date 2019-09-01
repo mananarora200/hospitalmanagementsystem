@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 # Create your models here.
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -31,8 +32,19 @@ class UserHistory(models.Model):
     def __str__(self):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)
 
+class Case(models.Model):
+    
+    user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
+    symptoms=models.CharField(max_length=60)
+    disease=models.CharField(max_length=30,default="popla")
+    starting_date=models.DateField(default=datetime.datetime.now())
+    last_visit=models.DateField(default=datetime.datetime.now())
+    def __str__(self):
+        return str(self.user.first_name)+"\t"+str(self.last_visit)
+
 class Visits(models.Model):
     visit_id=models.IntegerField()
+    
     medicine=models.CharField(max_length=50)
     progress=models.CharField(max_length=20)
     Date=models.DateField()
@@ -60,15 +72,6 @@ class Labs(models.Model):
     price=models.CharField(max_length=10)
     def __str__(self):
         return self.test
-
-class Case(models.Model):
-    user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
-    symptoms=models.CharField(max_length=60)
-    disease=models.CharField(max_length=30)
-    starting_date=models.DateField()
-    last_visit=models.DateField()
-    def __str__(self):
-        return str(self.user.first_name)+"\t"+str(self.last_visit)
 
 
 

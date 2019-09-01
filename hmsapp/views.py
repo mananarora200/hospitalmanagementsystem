@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import SignUpForm,UserLoginForm, HistoryForm
+from .forms import SignUpForm,UserLoginForm, HistoryForm,CreateCase
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import UserProfile, UserHistory,Labs,Medic, User
+from .models import UserProfile, UserHistory,Labs,Medic, User,Case,Visits
 # Create your views here.
 @login_required
 def homepage(request):
@@ -110,4 +110,13 @@ def showpatientprofile(request):
 
 @login_required
 def createcase(request):
-    pass
+    if request.method == "POST":
+        form = CreateCase(request.POST)
+        if form.is_valid():
+            current_case = form.save()
+            current_case.user = request.user
+            current_case.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = CreateCase()
+    return render(request,'createcase.html',context={'form':form})
