@@ -4,7 +4,7 @@ from .forms import SignUpForm,UserLoginForm, HistoryForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import UserProfile, UserHistory,Labs,Medic
+from .models import UserProfile, UserHistory,Labs,Medic, User
 # Create your views here.
 @login_required
 def homepage(request):
@@ -94,4 +94,16 @@ def test(request):
 
     return render(request,'lab.html',context)
 
-                 
+@login_required
+def showpatientprofile(request):
+    dataprofile = UserProfile.objects.get(user = request.user)
+    datauser = User.objects.get(id = request.user.id)
+    args = {
+        "name":datauser.first_name +" "+ datauser.last_name,
+        "phone":datauser.username,
+        "email":datauser.email,
+        "birthdate":dataprofile.birth_date,
+        "gender":dataprofile.gender,
+        "city":dataprofile.city
+    }
+    return render(request, "userprofile.html", context=args)

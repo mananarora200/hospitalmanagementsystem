@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Patient Profile</title>
+{% endblock %}
+
+{% block body %}
+<h2 class="container">Name: {{ name }}</h2>
+<h2 class="container">Phone Number: {{ phone }}</h2>
+<h2 class="container">Email: {{ email }}</h2>
+<h2 class="container">Date of Birth: {{ birthdate }}</h2>
+<h2 class="container">Gender: {{ gender }}</h2>
+<h2 class="container">City: {{ city }}</h2>
+{% endblock %}
