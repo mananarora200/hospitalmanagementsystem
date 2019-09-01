@@ -107,3 +107,7 @@ def showpatientprofile(request):
         "city":dataprofile.city
     }
     return render(request, "userprofile.html", context=args)
+
+@login_required
+def createcase(request):
+    pass
