@@ -33,7 +33,7 @@ class UserHistory(models.Model):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)
 
 class Case(models.Model):
-    
+    case_id=models.IntegerField(default=1)
     user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30,default="popla")
@@ -44,7 +44,7 @@ class Case(models.Model):
 
 class Visits(models.Model):
     visit_id=models.IntegerField()
-    
+    case_id=models.ForeignKey(Case,default=1,on_delete=models.SET_DEFAULT)
     medicine=models.CharField(max_length=50)
     progress=models.CharField(max_length=20)
     Date=models.DateField()

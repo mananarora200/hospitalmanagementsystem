@@ -25,6 +25,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='visits',
             name='case_id',
-            field=models.ForeignKey(default='a', on_delete=django.db.models.deletion.SET_DEFAULT, to='hmsapp.Case'),
+            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.SET_DEFAULT, to='hmsapp.Case'),
         ),
     ]
