@@ -36,7 +36,7 @@ class Case(models.Model):
     case_id=models.IntegerField(default=1)
     user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
     symptoms=models.CharField(max_length=60)
-    disease=models.CharField(max_length=30,default="popla")
+    disease=models.CharField(max_length=30, blank = True)
     starting_date=models.DateField(default=datetime.datetime.now())
     last_visit=models.DateField(default=datetime.datetime.now())
     def __str__(self):
