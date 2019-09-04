@@ -8,7 +8,11 @@ from .models import UserProfile, UserHistory,Labs,Medic, User,Case,Visits
 # Create your views here.
 @login_required
 def homepage(request):
-    return render(request,'home.html')
+    data = UserProfile.objects.get(user = request.user)
+    if data.role == "patient":
+        return render(request,'patienthome.html')
+    elif data.role == "doctor":
+        return render(request, "doctorhome.html")
     
 @login_required
 def showpatienthistory(request):
