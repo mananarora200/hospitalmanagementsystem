@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,logout,authenticate
-from .forms import SignUpForm,UserLoginForm, HistoryForm,CreateCase
+from .forms import SignUpForm,UserLoginForm, HistoryForm,CreateCase,CreateVisit
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -120,7 +120,27 @@ def createcase(request):
             current_case = form.save()
             current_case.user = request.user
             current_case.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('createvisit')
     else:
         form = CreateCase()
     return render(request,'createcase.html',context={'form':form})
+
+@login_required
+def existingcase(request):
+    data=Case.objects.filter(user = request.user)
+
+    context= {'data':data}
+
+    return render(request,'existingcase.html',context)
+
+def createvisit(request):
+    if request.method == "POST":
+        form = CreateVisit(request.POST)
+        if form.is_valid():
+            current_visit = form.save()
+            current_visit.case_id_id=request.user
+            current_visit.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = CreateVisit()
+    return render(request,'createvisit.html',context={'form':form})

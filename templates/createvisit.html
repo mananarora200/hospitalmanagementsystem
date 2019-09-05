@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title> Visit form </title>
+{% endblock %}
+
+{% block body %}
+<h1>Create Visit</h1>
+<hr>
+<form method="POST" class="container">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

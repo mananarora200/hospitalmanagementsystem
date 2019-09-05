@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Existing Cases</title>
+{% endblock %}
+
+{% block body %}
+{% for Cases in data %}
+{{ Cases.user.first_name }}
+{{ Cases.symptoms}}
+{{ Cases.startingdate}}
+{{ Cases.lastvisit}}
+<br>
+{% endfor %}
+
+
+{% endblock %}

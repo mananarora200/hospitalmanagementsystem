@@ -33,8 +33,8 @@ class UserHistory(models.Model):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)
 
 class Case(models.Model):
-    case_id=models.IntegerField(default=1)
-    user = models.ForeignKey(User,default=1,on_delete=models.SET_DEFAULT)
+    
+    user = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30, blank = True)
     starting_date=models.DateField(default=datetime.datetime.now())
@@ -43,23 +43,22 @@ class Case(models.Model):
         return str(self.user.first_name)+"\t"+str(self.last_visit)
 
 class Visits(models.Model):
-    visit_id=models.IntegerField()
-    case_id=models.ForeignKey(Case,default=1,on_delete=models.SET_DEFAULT)
-    medicine=models.CharField(max_length=50)
-    progress=models.CharField(max_length=20)
+    case_id=models.ForeignKey(Case,default=1,on_delete=models.CASCADE)
+    medicine=models.CharField(max_length=50,blank=True)
+    progress=models.CharField(max_length=20,blank=True)
     Date=models.DateField()
-    test=models.CharField(max_length=50)
+    test=models.CharField(max_length=50,blank=True)
     time=models.IntegerField()
     temperature=models.IntegerField()
     bp=models.IntegerField()
     symptoms=models.CharField(max_length=60)
-    disease=models.CharField(max_length=30)
+    disease=models.CharField(max_length=30,blank=True)
     def __str__(self):
-        return self.progress
+        return str(self.case_id)
 
 class Medic(models.Model):
     
-    visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
+    visit_id=models.ForeignKey(Visits,on_delete=models.CASCADE)
     medicines=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
     def __str__(self):
@@ -67,7 +66,7 @@ class Medic(models.Model):
 
 class Labs(models.Model):
 
-    visit_id=models.ForeignKey(Visits,default=1,on_delete=models.SET_DEFAULT)
+    visit_id=models.ForeignKey(Visits,on_delete=models.CASCADE)
     test=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
     def __str__(self):

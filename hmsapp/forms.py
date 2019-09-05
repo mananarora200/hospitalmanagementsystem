@@ -64,3 +64,7 @@ class CreateCase(ModelForm):
         model = Case
         fields = ['symptoms',]
 
+class CreateVisit(ModelForm):
+    class Meta:
+        model = Visits
+        fields = ['Date','time','temperature','bp','symptoms',]
