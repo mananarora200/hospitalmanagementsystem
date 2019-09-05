@@ -9,6 +9,7 @@ CHOICES= [
     ('other', 'Other'),
     
     ]
+
 class UserLoginForm(forms.Form):
      username=forms.CharField(max_length=20,label='Phone Number')
      password=forms.CharField(max_length=100,widget=forms.PasswordInput)
@@ -68,3 +69,8 @@ class CreateVisit(ModelForm):
     class Meta:
         model = Visits
         fields = ['Date','time','temperature','bp','symptoms',]
+
+
+              
+
+            

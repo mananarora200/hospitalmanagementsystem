@@ -5,13 +5,26 @@
 {% endblock %}
 
 {% block body %}
-{% for Cases in data %}
-{{ Cases.user.first_name }}
-{{ Cases.symptoms}}
-{{ Cases.startingdate}}
-{{ Cases.lastvisit}}
-<br>
-{% endfor %}
+
+<form class="container" method="POST" action="createvisit">
+        {% csrf_token %}
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Existing cases</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+     {% for Cases in data %}
+      <option>
+            {{ Cases.user.first_name }}
+            {{ Cases.symptoms}}
+            {{ Cases.startingdate}}
+            {{ Cases.lastvisit}}
+
+      </option>
+      {% endfor %}
+      
+    </select>
+    <input type="submit" value="submit">
+  </div>
+</form>  
 
 
 {% endblock %}
