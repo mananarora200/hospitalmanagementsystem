@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import datetime
 # Create your models here.
 class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -37,22 +36,22 @@ class Case(models.Model):
     user = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30, blank = True)
-    starting_date=models.DateField(default=datetime.datetime.now())
-    last_visit=models.DateField(default=datetime.datetime.now())
+    starting_date=models.DateField(auto_now= True)
+    last_visit=models.DateField(blank = True, null = True)
     def __str__(self):
         return str(self.user.first_name)+"\t"+str(self.last_visit)
 
 class Visits(models.Model):
-    case_id=models.ForeignKey(Case,default=1,on_delete=models.CASCADE)
-    medicine=models.CharField(max_length=50,blank=True)
-    progress=models.CharField(max_length=20,blank=True)
-    Date=models.DateField()
-    test=models.CharField(max_length=50,blank=True)
-    time=models.IntegerField()
-    temperature=models.IntegerField()
-    bp=models.IntegerField()
-    symptoms=models.CharField(max_length=60)
-    disease=models.CharField(max_length=30,blank=True)
+    case = models.ForeignKey(Case,default=1,on_delete=models.CASCADE)
+    medicine = models.CharField(max_length=50,blank=True)
+    progress = models.CharField(max_length=50,blank=True)
+    date = models.DateField(auto_now = True)
+    test = models.CharField(max_length=50,blank=True)
+    temperature = models.IntegerField(blank = True, null  = True)
+    bp = models.CharField(max_length = 6, blank = True)
+    current_status = models.CharField(max_length=60)
+    disease = models.CharField(max_length=30,blank=True)
+    time = models.TimeField(default = "00:00")
     def __str__(self):
         return str(self.case_id)
 

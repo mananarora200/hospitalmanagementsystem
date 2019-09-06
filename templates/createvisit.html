@@ -10,6 +10,17 @@
 <form method="POST" class="container">
     {% csrf_token %}
     {{form.as_p}}
+    <div class="form-group">
+    <label for="exampleFormControlSelect1">Existing cases</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="dropdown1">
+         {% for case in cases %}
+          <option value="{{ case.id }}">
+                {{ case.symptoms }}
+                {{ case.starting_date }}
+          </option>
+          {% endfor %}
+          
+        </select>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}

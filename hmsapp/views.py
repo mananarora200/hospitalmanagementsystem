@@ -117,10 +117,12 @@ def createcase(request):
     if request.method == "POST":
         form = CreateCase(request.POST)
         if form.is_valid():
-            current_case = form.save()
+            current_case = form.save(commit=False)
             current_case.user = request.user
             current_case.save()
-            return HttpResponseRedirect('createvisit')
+            current_visit = Visits.objects.create(current_status = current_case.symptoms, time = request.POST.get("time"), case_id = current_case.id)
+            current_visit.save()
+            return redirect("/")
     else:
         form = CreateCase()
     return render(request,'createcase.html',context={'form':form})
@@ -128,19 +130,23 @@ def createcase(request):
 @login_required
 def existingcase(request):
     data=Case.objects.filter(user = request.user)
-
-    context= {'data':data}
-
-    return render(request,'existingcase.html',context)
-
-def createvisit(request):
+    case_list = []
+    for cases in data:
+        one_case = (cases.symptoms+" "+str(cases.starting_date), cases.id)
+        case_list.append(one_case)
     if request.method == "POST":
         form = CreateVisit(request.POST)
         if form.is_valid():
-            current_visit = form.save()
-            current_visit.case_id_id=request.user
+            current_visit = form.save(commit= False)
+            print(current_visit.time)
+            cname=request.POST.get('dropdown1')
+            current_visit.case_id=cname
             current_visit.save()
             return HttpResponseRedirect('/')
     else:
         form = CreateVisit()
-    return render(request,'createvisit.html',context={'form':form})
+    context = {
+        "form":form,
+        "cases":data,
+    }
+    return render(request,'createvisit.html',context=context)
