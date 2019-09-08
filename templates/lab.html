@@ -1,14 +1,20 @@
 {% extends 'home.html' %}
 
 {% block head %}
-<title>Test</title>
+<title>Labs</title>
 {% endblock %}
 
 {% block body %}
+<div class="container">
+test={{lab}}<br>
+<form method="POST" action="save_lab">
+    {% csrf_token %}
+    enter price:<input type="number" name="price" >
+    <input type="submit" value="save">
+</form>
+</div>
 
-{{ test }}
-{{ price }}
 
-
+<a class="btn btn-primary" href="/lab" role="button"  >next patient</a>
 
 {% endblock %}

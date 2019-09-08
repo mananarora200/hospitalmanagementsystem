@@ -8,11 +8,12 @@ urlpatterns = [
     path('patienthistory',views.userhistory,name='patienthistory' ),
     path('showpatienthistory',views.showpatienthistory,name='showpatienthistory' ),
     path('medicine',views.medicine,name='medicine' ),
-    path('test',views.test,name='test' ),
+    path('lab',views.test,name='test' ),
     path('showpatientprofile', views.showpatientprofile, name = "patientprofile"),
     path('createcase', views.createcase, name = "createcase"),
     path('existingcase', views.existingcase, name = "existingcase"),
     path('save_medic', views.save_medic, name = "save_medic"),
+    path('save_lab', views.save_lab, name = "save_lab"),
     #path('createvisit', views.createvisit, name = "createvisit"),
     
     

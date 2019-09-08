@@ -14,7 +14,9 @@ def homepage(request):
     elif data.role == "doctor":
         return render(request, "doctorhome.html")
     elif data.role == "medic":
-        return render(request, "medic.html")    
+        return render(request, "medic.html")
+    elif data.role == "lab":
+        return render(request, "lab.html")    
     
 @login_required
 def showpatienthistory(request):
@@ -103,11 +105,16 @@ def medicine(request):
 
 @login_required    
 def test(request):
-    data=Labs.objects.get(user=request.user)
+    data=Current.objects.get(id=1)
 
-    context= {'test':data.test,
-    'price':data.price}
+    current_lab=data.clab
+    data_new=Labs.objects.get(id=current_lab)
 
+    context= {'lab':data_new.test,
+    }
+    current_lab=current_lab+1
+    data.clab=current_lab
+    data.save()
     return render(request,'lab.html',context)
 
 @login_required
@@ -169,7 +176,6 @@ def save_medic(request):
     
         data=Current.objects.get(id=1)
         price=request.POST.get('price')
-        print(price)
         current_medic=data.cmedic
         data_new=Medic.objects.get(id=current_medic-1)
         data_new.price=price
@@ -177,6 +183,17 @@ def save_medic(request):
         
         return render(request,'save_medic.html')
 
+@login_required
+def save_lab(request):
+
     
+        data=Current.objects.get(id=1)
+        price=request.POST.get('price')
+        current_lab=data.clab
+        data_new=Labs.objects.get(id=current_lab-1)
+        data_new.price=price
+        data_new.save()
+        
+        return render(request,'save_lab.html')
 
 
