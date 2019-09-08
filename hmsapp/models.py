@@ -57,7 +57,7 @@ class Visits(models.Model):
 
 class Medic(models.Model):
     
-    visit_id=models.ForeignKey(Visits,on_delete=models.CASCADE)
+    visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
     medicines=models.CharField(max_length=50)
     price=models.CharField(max_length=10)
     def __str__(self):
@@ -70,6 +70,11 @@ class Labs(models.Model):
     price=models.CharField(max_length=10)
     def __str__(self):
         return self.test
+class Current(models.Model):
+    cmedic=models.IntegerField()
+    clab=models.IntegerField()
+    
+
 
 
 

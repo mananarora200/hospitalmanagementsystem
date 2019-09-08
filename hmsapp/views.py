@@ -4,7 +4,7 @@ from .forms import SignUpForm,UserLoginForm, HistoryForm,CreateCase,CreateVisit
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import UserProfile, UserHistory,Labs,Medic, User,Case,Visits
+from .models import UserProfile, UserHistory,Labs,Medic, User,Case,Visits,Current
 # Create your views here.
 @login_required
 def homepage(request):
@@ -13,6 +13,8 @@ def homepage(request):
         return render(request,'patienthome.html')
     elif data.role == "doctor":
         return render(request, "doctorhome.html")
+    elif data.role == "medic":
+        return render(request, "medic.html")    
     
 @login_required
 def showpatienthistory(request):
@@ -84,11 +86,21 @@ def userhistory(request):
     return render(request,'history.html',context={'form':form})
 @login_required                    
 def medicine(request):
-    data=Medic.objects.all()
+    
+        data=Current.objects.get(id=1)
 
-    context= {'data':data}
+        current_medic=data.cmedic
+        data_new=Medic.objects.get(id=current_medic)
 
-    return render(request,'medicine.html',context)
+        context= {'medicine':data_new.medicines,
+        }
+        current_medic=current_medic+1
+        data.cmedic=current_medic
+        data.save()
+        return render(request,'medicine.html',context)
+    
+          
+
 @login_required    
 def test(request):
     data=Labs.objects.get(user=request.user)
@@ -150,3 +162,21 @@ def existingcase(request):
         "cases":data,
     }
     return render(request,'createvisit.html',context=context)
+
+@login_required
+def save_medic(request):
+
+    
+        data=Current.objects.get(id=1)
+        price=request.POST.get('price')
+        print(price)
+        current_medic=data.cmedic
+        data_new=Medic.objects.get(id=current_medic-1)
+        data_new.price=price
+        data_new.save()
+        
+        return render(request,'save_medic.html')
+
+    
+
+

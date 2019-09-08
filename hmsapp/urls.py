@@ -12,6 +12,8 @@ urlpatterns = [
     path('showpatientprofile', views.showpatientprofile, name = "patientprofile"),
     path('createcase', views.createcase, name = "createcase"),
     path('existingcase', views.existingcase, name = "existingcase"),
+    path('save_medic', views.save_medic, name = "save_medic"),
     #path('createvisit', views.createvisit, name = "createvisit"),
+    
     
 ]

@@ -5,12 +5,16 @@
 {% endblock %}
 
 {% block body %}
-{% for Medicine in data %}
-{{ Medicine.price }}
+<div class="container">
+medicine={{medicine}}<br>
+<form method="POST" action="save_medic">
+    {% csrf_token %}
+    enter price:<input type="number" name="price" >
+    <input type="submit" value="save">
+</form>
+</div>
 
-{{ Medicine.medicines}}
-<br>
-{% endfor %}
 
+<a class="btn btn-primary" href="/medicine" role="button"  >next patient</a>
 
 {% endblock %}
