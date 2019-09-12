@@ -12,24 +12,25 @@ def homepage(request):
     if data.role == "patient":
         return render(request,'patienthome.html')
     elif data.role == "doctor":
-        data = Current.objects.get(id = 1)
-        current_doc = data.cdoc
-        data_visit = Visits.objects.get(id = current_doc)
-        data_case = Case.objects.get(id = data_visit.case)
-        data_patient = User.objects.get(id = data_case.user)
-        patient_profile = UserProfile.objects.get(user = data_case.user)
-        patient_history = UserHistory.objects.get(user = data_case.user)
-        context = {
-            "profile":patient_profile,
-            "history":patient_history,
-            "visit":data_visit,
-            "patient":data_patient,
-            "case":data_case,
-        }
-        current_doc = current_doc + 1
-        data.cdoc = current_doc
-        data.save()
-        return render(request, "doctorhome.html", context)
+       if request.method == "POST":
+            data = Current.objects.get(id = 1)
+            current_doc = data.cdoc
+            data_visit = Visits.objects.get(id = current_doc)
+            data_case = Case.objects.get(id = data_visit.case)
+            data_patient = User.objects.get(id = data_case.user)
+            patient_profile = UserProfile.objects.get(user = data_case.user)
+            patient_history = UserHistory.objects.get(user = data_case.user)
+            context = {
+                "profile":patient_profile,
+                "history":patient_history,
+                "visit":data_visit,
+                "patient":data_patient,
+                "case":data_case,
+            }
+            current_doc = current_doc + 1
+            data.cdoc = current_doc
+            data.save()
+            return render(request, "doctorhome.html", context)
     elif data.role == "medic":
         return render(request, "medic.html")
     elif data.role == "lab":
@@ -65,7 +66,7 @@ def login_request(request):
     else:
         form=UserLoginForm()
     return render(request,"login.html",context={'form':form})
-
+@login_required
 def logout_request(request):
     logout(request)
     messages.info(request,"Logged out succesfully")

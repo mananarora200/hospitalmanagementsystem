@@ -5,6 +5,28 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="container"></h1>    
-<a href="/logout">logout</a>
+<form >
+{% csrf_token %}
+<div class="container">
+<h1 class="container">Patient Profile</h1>
+<h2>Name:</h2> {{ patient.first_name }} {{ patient.last_name }}
+<h2>Date of Birth:</h2> {{ profile.birth_date }}
+<h2>Gender:</h2> {{ profile.gender }}
+</div>
+<div class="container">
+<h1 class="container">Patient History</h1>
+<h2>Diabetes:</h2>{{ history.diabetes }}
+<h2>Blood Problems:</h2>{{ history.blood_pressure }}
+<h2>Heart Problems:</h2>{{ history.heart_problems }}
+<h2>Drink:</h2>{{ history.drink }}
+<h2>Smoke:</h2>{{ history.smoke }}
+<h2>Drugs:</h2>{{ history.drugs }}
+</div>
+<div class="container">Current Visit</div>
+<h2>Symptoms: </h2> {{ visit.current_status }}
+<h2>Symptoms: </h2> {{ visit.temperature }}
+<h2>Symptoms: </h2> {{ visit.bp }}
+
+<input type="submit" value="Next Patient">
+</form>
 {% endblock %}
