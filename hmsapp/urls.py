@@ -14,6 +14,8 @@ urlpatterns = [
     path('existingcase', views.existingcase, name = "existingcase"),
     path('save_medic', views.save_medic, name = "save_medic"),
     path('save_lab', views.save_lab, name = "save_lab"),
+    path('save_mediocar', views.save_mediocar, name = "save_mediocar"),
+    path('mediocar', views.mediocar, name = "mediocar"),
     #path('createvisit', views.createvisit, name = "createvisit"),
     
     

@@ -34,7 +34,9 @@ def homepage(request):
     elif data.role == "medic":
         return render(request, "medic.html")
     elif data.role == "lab":
-        return render(request, "lab.html")    
+        return render(request, "lab.html") 
+    elif data.role == "mediocar":
+        return render(request, "mediocarhome.html")        
     
 @login_required
 def showpatienthistory(request):
@@ -213,5 +215,33 @@ def save_lab(request):
         data_new.save()
         
         return render(request,'save_lab.html')
+@login_required        
+def mediocar(request):
+    data=Current.objects.get(id=1)
+
+    current_visit=data.cvisit
+    data_new=Visits.objects.get(id=current_visit)
+
+    context= {'case':data_new.case,
+    }
+    current_visit=current_visit+1
+    data.cvisit=current_visit
+    data.save()
+    return render(request,'mediocar.html',context)
+@login_required    
+def save_mediocar(request):
+    
+    
+        data=Current.objects.get(id=1)
+        temperature=request.POST.get('temperature')
+        bp=request.POST.get('bp')
+        current_visit=data.cvisit
+        data_new=Visits.objects.get(id=current_visit-1)
+        data_new.temperature=temperature
+        data_new.bp=bp
+        data_new.save()
+        
+        return render(request,'save_mediocar.html')    
+        
 
 

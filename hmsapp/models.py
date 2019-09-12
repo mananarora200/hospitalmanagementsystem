@@ -74,6 +74,7 @@ class Current(models.Model):
     cmedic=models.IntegerField()
     clab=models.IntegerField()
     cdoc = models.IntegerField(default = 1)
+    cvisit = models.IntegerField(default = 1)
     
 
 

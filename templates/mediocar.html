@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<title>Mediocar</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+case={{case}}<br>
+<form method="POST" action="save_mediocar">
+    {% csrf_token %}
+    temprature:<input type="number" name="temperature" >
+    bp:<input type="text" name="bp" >
+    <input type="submit" value="save">
+</form>
+</div>
+
+
+<a class="btn btn-primary" href="/mediocar" role="button"  >next patient</a>
+
+{% endblock %}
