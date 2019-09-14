@@ -38,6 +38,7 @@ def homepage(request):
     elif data.role == "mediocar":
         return render(request, "mediocarhome.html")        
     
+
 @login_required
 def showpatienthistory(request):
     data = UserHistory.objects.get(user = request.user)
@@ -48,6 +49,7 @@ def showpatienthistory(request):
     "smoke":data.smoke,
     "drugs":data.drugs}
     return render(request,"patienthistory.html", context=args)
+
 
 def login_request(request):
     if request.method=='POST':
@@ -68,11 +70,15 @@ def login_request(request):
     else:
         form=UserLoginForm()
     return render(request,"login.html",context={'form':form})
+
+
 @login_required
 def logout_request(request):
     logout(request)
     messages.info(request,"Logged out succesfully")
     return redirect('/login')
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -91,6 +97,8 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
 @login_required
 def userhistory(request):
     if request.method == "POST":
@@ -106,23 +114,22 @@ def userhistory(request):
     else:
         form = HistoryForm()
     return render(request,'history.html',context={'form':form})
+
+
 @login_required                    
 def medicine(request):
     
-        data=Current.objects.get(id=1)
-
-        current_medic=data.cmedic
-        data_new=Medic.objects.get(id=current_medic)
-
-        context= {'medicine':data_new.medicines.split('\n'),
-        }
-        current_medic=current_medic+1
-        data.cmedic=current_medic
-        data.save()
-        return render(request,'medicine.html',context)
+    data=Current.objects.get(id=1)
+    current_medic=data.cmedic
+    data_new=Medic.objects.get(id=current_medic)
+    context= {'medicine':data_new.medicines.split('\n'),
+    }
+    current_medic=current_medic+1
+    data.cmedic=current_medic
+    data.save()
+    return render(request,'medicine.html',context)
     
           
-
 @login_required    
 def test(request):
     i=1
@@ -196,56 +203,48 @@ def existingcase(request):
 
 @login_required
 def save_medic(request):
-
-    
-        data=Current.objects.get(id=1)
-        price=request.POST.get('price')
-        current_medic=data.cmedic
-        data_new=Medic.objects.get(id=current_medic-1)
-        data_new.price=price
-        data_new.save()
-        
-        return render(request,'save_medic.html')
+    data=Current.objects.get(id=1)
+    price=request.POST.get('price')
+    current_medic=data.cmedic
+    data_new=Medic.objects.get(id=current_medic-1)
+    data_new.price=price
+    data_new.save()
+    return render(request,'save_medic.html')
 
 @login_required
 def save_lab(request):
+    data=Current.objects.get(id=1)
+    price1=request.POST.get('price1')
+    current_lab=data.clab
+    data_new=Labs.objects.get(id=current_lab-1)
+    data_new.price=price1
+    data_new.save()
+    return render(request,'save_lab.html')
 
-    
-        data=Current.objects.get(id=1)
-        price1=request.POST.get('price1')
-        current_lab=data.clab
-        data_new=Labs.objects.get(id=current_lab-1)
-        data_new.price=price1
-        data_new.save()
-        
-        return render(request,'save_lab.html')
+
 @login_required        
 def mediocar(request):
     data=Current.objects.get(id=1)
-
     current_visit=data.cvisit
     data_new=Visits.objects.get(id=current_visit)
-
     context= {'case':data_new.case,
     }
     current_visit=current_visit+1
     data.cvisit=current_visit
     data.save()
     return render(request,'mediocar.html',context)
+
 @login_required    
 def save_mediocar(request):
-    
-    
-        data=Current.objects.get(id=1)
-        temperature=request.POST.get('temperature')
-        bp=request.POST.get('bp')
-        current_visit=data.cvisit
-        data_new=Visits.objects.get(id=current_visit-1)
-        data_new.temperature=temperature
-        data_new.bp=bp
-        data_new.save()
-        
-        return render(request,'save_mediocar.html')   
+    data=Current.objects.get(id=1)
+    temperature=request.POST.get('temperature')
+    bp=request.POST.get('bp')
+    current_visit=data.cvisit
+    data_new=Visits.objects.get(id=current_visit-1)
+    data_new.temperature=temperature
+    data_new.bp=bp
+    data_new.save()
+    return render(request,'save_mediocar.html')   
  
 @login_required
 def save_doc(request):
