@@ -6,12 +6,21 @@
 
 {% block body %}
 <div class="container">
-medicine={{medicine}}<br>
-<form method="POST" action="save_medic">
+    
+    <form method="POST" action="save_medic">
+            {% csrf_token %}
+            {%for medicine in medicine%}
+medicine={{medicine}}
+enter price:<input type="number" name="price" ><br>
+{% endfor%}
+    <input type="submit" value="save">
+</form>
+
+<!-- <form method="POST" action="save_medic">
     {% csrf_token %}
     enter price:<input type="number" name="price" >
     <input type="submit" value="save">
-</form>
+</form> -->
 </div>
 
 

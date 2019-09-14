@@ -12,25 +12,8 @@ def homepage(request):
     if data.role == "patient":
         return render(request,'patienthome.html')
     elif data.role == "doctor":
-       if request.method == "POST":
-            data = Current.objects.get(id = 1)
-            current_doc = data.cdoc
-            data_visit = Visits.objects.get(id = current_doc)
-            data_case = Case.objects.get(id = data_visit.case)
-            data_patient = User.objects.get(id = data_case.user)
-            patient_profile = UserProfile.objects.get(user = data_case.user)
-            patient_history = UserHistory.objects.get(user = data_case.user)
-            context = {
-                "profile":patient_profile,
-                "history":patient_history,
-                "visit":data_visit,
-                "patient":data_patient,
-                "case":data_case,
-            }
-            current_doc = current_doc + 1
-            data.cdoc = current_doc
-            data.save()
-            return render(request, "doctorhome.html", context)
+        return render(request,'doc.html')
+
     elif data.role == "medic":
         return render(request, "medic.html")
     elif data.role == "lab":
@@ -114,7 +97,7 @@ def medicine(request):
         current_medic=data.cmedic
         data_new=Medic.objects.get(id=current_medic)
 
-        context= {'medicine':data_new.medicines,
+        context= {'medicine':data_new.medicines.split('\n'),
         }
         current_medic=current_medic+1
         data.cmedic=current_medic
@@ -125,12 +108,16 @@ def medicine(request):
 
 @login_required    
 def test(request):
+    i=1
     data=Current.objects.get(id=1)
 
     current_lab=data.clab
     data_new=Labs.objects.get(id=current_lab)
+    
 
-    context= {'lab':data_new.test,
+    context= {'lab':data_new.test.split('\n'),
+    'i':i
+    
     }
     current_lab=current_lab+1
     data.clab=current_lab
@@ -208,10 +195,10 @@ def save_lab(request):
 
     
         data=Current.objects.get(id=1)
-        price=request.POST.get('price')
+        price1=request.POST.get('price1')
         current_lab=data.clab
         data_new=Labs.objects.get(id=current_lab-1)
-        data_new.price=price
+        data_new.price=price1
         data_new.save()
         
         return render(request,'save_lab.html')
@@ -241,7 +228,47 @@ def save_mediocar(request):
         data_new.bp=bp
         data_new.save()
         
-        return render(request,'save_mediocar.html')    
+        return render(request,'save_mediocar.html')   
+@login_required
+def doctor(request): 
+    data = Current.objects.get(id = 1)
+    current_doc = data.cdoc
+    data_visit = Visits.objects.get(id = current_doc)
+    data_case = Case.objects.get(id = data_visit.case_id)
+    data_patient = User.objects.get(id = data_case.user_id)
+    patient_profile = UserProfile.objects.get(user = data_case.user)
+    patient_history = UserHistory.objects.get(user = data_case.user)
+    context = {
+        "profile":patient_profile,
+        "history":patient_history,
+        "visit":data_visit,
+        "patient":data_patient,
+        "case":data_case,
+    }
+    current_doc = current_doc + 1
+    data.cdoc = current_doc
+    data.save()
+    return render(request, "doctorhome.html", context)  
+@login_required
+def save_doc(request):
+    data=Current.objects.get(id=1)
+    disease=request.POST.get('disease')
+    medicines=request.POST.get('medicines')
+    test=request.POST.get('test')
+        
+    current_visit=data.cdoc
+    data_new=Visits.objects.get(id=current_visit-1)
+    data_new1=Medic.objects.get(id=current_visit-1)
+    data_new2=Labs.objects.get(id=current_visit-1)
+    data_new.disease=disease
+    data_new1.medicines=medicines
+    data_new2.test=test
+    data_new.save()
+    data_new1.save()
+    data_new2.save()
+        
+    return render(request,'save_doc.html')
+
         
 
 

@@ -43,10 +43,8 @@ class Case(models.Model):
 
 class Visits(models.Model):
     case = models.ForeignKey(Case,default=1,on_delete=models.CASCADE)
-    medicine = models.CharField(max_length=50,blank=True)
     progress = models.CharField(max_length=50,blank=True)
     date = models.DateField(auto_now = True)
-    test = models.CharField(max_length=50,blank=True)
     temperature = models.IntegerField(blank = True, null  = True)
     bp = models.CharField(max_length = 6, blank = True)
     current_status = models.CharField(max_length=60)
@@ -58,7 +56,7 @@ class Visits(models.Model):
 class Medic(models.Model):
     
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
-    medicines=models.CharField(max_length=50)
+    medicines=models.TextField(max_length=100)
     price=models.CharField(max_length=10)
     def __str__(self):
         return self.medicines
@@ -66,7 +64,7 @@ class Medic(models.Model):
 class Labs(models.Model):
 
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
-    test=models.CharField(max_length=50)
+    test=models.TextField(max_length=50)
     price=models.CharField(max_length=10)
     def __str__(self):
         return self.test

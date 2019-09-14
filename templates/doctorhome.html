@@ -5,11 +5,10 @@
 {% endblock %}
 
 {% block body %}
-<form >
-{% csrf_token %}
+
 <div class="container">
 <h1 class="container">Patient Profile</h1>
-<h2>Name:</h2> {{ patient.first_name }} {{ patient.last_name }}
+<h2>Name: {{ patient.first_name }} {{ patient.last_name }}</h2>
 <h2>Date of Birth:</h2> {{ profile.birth_date }}
 <h2>Gender:</h2> {{ profile.gender }}
 </div>
@@ -26,7 +25,19 @@
 <h2>Symptoms: </h2> {{ visit.current_status }}
 <h2>Symptoms: </h2> {{ visit.temperature }}
 <h2>Symptoms: </h2> {{ visit.bp }}
-
-<input type="submit" value="Next Patient">
+<form method="POST" action="save_doc">
+        {% csrf_token %}
+ disease: <input type="text" name="disease">
+ <!-- medicine:<input type="text" name="medicines">
+ test: <input type="text" name="test"> -->
+ <div class="form-group">
+        <label for="exampleFormControlTextarea1">medicine</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="medicines"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">test</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test"></textarea>
+      </div>
+<input type="submit" value="save">
 </form>
 {% endblock %}
