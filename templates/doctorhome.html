@@ -23,21 +23,24 @@
 </div>
 <div class="container">Current Visit</div>
 <h2>Symptoms: </h2> {{ visit.current_status }}
-<h2>Symptoms: </h2> {{ visit.temperature }}
-<h2>Symptoms: </h2> {{ visit.bp }}
+<h2>Temperature: </h2> {{ visit.temperature }}
+<h2>Blood Pressure: </h2> {{ visit.bp }}
 <form method="POST" action="save_doc">
         {% csrf_token %}
- disease: <input type="text" name="disease">
+ Disease: <input type="text" name="disease">
  <!-- medicine:<input type="text" name="medicines">
  test: <input type="text" name="test"> -->
  <div class="form-group">
-        <label for="exampleFormControlTextarea1">medicine</label>
+        <label for="exampleFormControlTextarea1">Medicine:</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="medicines"></textarea>
       </div>
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">test</label>
+        <label for="exampleFormControlTextarea1">Test</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test"></textarea>
       </div>
 <input type="submit" value="save">
 </form>
+<br>
+    
+<a href="/logout" class = "btn btn-default">Logout</a>
 {% endblock %}

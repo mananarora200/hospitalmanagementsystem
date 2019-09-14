@@ -12,7 +12,24 @@ def homepage(request):
     if data.role == "patient":
         return render(request,'patienthome.html')
     elif data.role == "doctor":
-        return render(request,'doc.html')
+        data = Current.objects.get(id = 1)
+        current_doc = data.cdoc
+        data_visit = Visits.objects.get(id = current_doc)
+        data_case = Case.objects.get(id = data_visit.case_id)
+        data_patient = User.objects.get(id = data_case.user_id)
+        patient_profile = UserProfile.objects.get(user = data_case.user)
+        patient_history = UserHistory.objects.get(user = data_case.user)
+        context = {
+            "profile":patient_profile,
+            "history":patient_history,
+            "visit":data_visit,
+            "patient":data_patient,
+            "case":data_case,
+        }
+        current_doc = current_doc + 1
+        data.cdoc = current_doc
+        data.save()
+        return render(request, "doctorhome.html", context)  
 
     elif data.role == "medic":
         return render(request, "medic.html")
@@ -229,44 +246,21 @@ def save_mediocar(request):
         data_new.save()
         
         return render(request,'save_mediocar.html')   
-@login_required
-def doctor(request): 
-    data = Current.objects.get(id = 1)
-    current_doc = data.cdoc
-    data_visit = Visits.objects.get(id = current_doc)
-    data_case = Case.objects.get(id = data_visit.case_id)
-    data_patient = User.objects.get(id = data_case.user_id)
-    patient_profile = UserProfile.objects.get(user = data_case.user)
-    patient_history = UserHistory.objects.get(user = data_case.user)
-    context = {
-        "profile":patient_profile,
-        "history":patient_history,
-        "visit":data_visit,
-        "patient":data_patient,
-        "case":data_case,
-    }
-    current_doc = current_doc + 1
-    data.cdoc = current_doc
-    data.save()
-    return render(request, "doctorhome.html", context)  
+ 
 @login_required
 def save_doc(request):
     data=Current.objects.get(id=1)
     disease=request.POST.get('disease')
     medicines=request.POST.get('medicines')
     test=request.POST.get('test')
-        
     current_visit=data.cdoc
     data_new=Visits.objects.get(id=current_visit-1)
-    data_new1=Medic.objects.get(id=current_visit-1)
-    data_new2=Labs.objects.get(id=current_visit-1)
+    data_new1=Medic.objects.create(medicines = medicines, visit_id = current_visit-1)
+    data_new2=Labs.objects.create(test = test, visit_id = current_visit-1)
     data_new.disease=disease
-    data_new1.medicines=medicines
-    data_new2.test=test
     data_new.save()
     data_new1.save()
     data_new2.save()
-        
     return render(request,'save_doc.html')
 
         
