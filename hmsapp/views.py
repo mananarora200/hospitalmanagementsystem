@@ -247,6 +247,7 @@ def save_mediocar(request):
     data_new.save()
     return render(request,'save_mediocar.html')   
  
+ 
 @login_required
 def save_doc(request):
     data=Current.objects.get(id=1)
