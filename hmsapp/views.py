@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import UserProfile, UserHistory,Labs,Medic, User,Case,Visits,Current
+import datetime
 
 
 @login_required
@@ -158,6 +159,7 @@ def createcase(request):
         if form.is_valid():
             current_case = form.save(commit=False)
             current_case.user = request.user
+            current_case.last_visit = datetime.datetime.date()
             current_case.save()
             current_visit = Visits.objects.create(current_status = current_case.symptoms, time = request.POST.get("time"), case_id = current_case.id)
             current_visit.save()
@@ -177,10 +179,12 @@ def existingcase(request):
         form = CreateVisit(request.POST)
         if form.is_valid():
             current_visit = form.save(commit= False)
-            print(current_visit.time)
-            cname=request.POST.get('dropdown1')
-            current_visit.case_id=cname
+            cname = request.POST.get('dropdown1')
+            data_case = Case.objects.get(id = cname)
+            data_case.last_visit = datetime.datetime.date()
+            current_visit.case_id = cname
             current_visit.save()
+            data_case.save()
             return HttpResponseRedirect('/')
     else:
         form = CreateVisit()
@@ -193,9 +197,13 @@ def existingcase(request):
 @login_required
 def save_medic(request):
     data=Current.objects.get(id=1)
-    price=request.POST.get('price1')
     current_medic=data.cmedic
     data_new=Medic.objects.get(id=current_medic)
+    medicine_list = data_new.medicines.split('\n')
+    price_list = []
+    for i in range(len(medicine_list)):
+        price_list.append(request.POST.get("price"+str(i+1)))    
+    price = "\n".join(price_list)
     data_new.price=price
     data_new.save()
     current_medic=current_medic+1
@@ -206,10 +214,14 @@ def save_medic(request):
 @login_required
 def save_lab(request):
     data=Current.objects.get(id=1)
-    price1=request.POST.get('price1')
     current_lab=data.clab
     data_new=Labs.objects.get(id=current_lab)
-    data_new.price=price1
+    lab_list = data_new.test.split('\n')
+    price_list = []
+    for i in range(len(lab_list)):
+        price_list.append(request.POST.get("price"+str(i+1)))    
+    price = "\n".join(price_list)
+    data_new.price = price
     data_new.save()
     current_lab=current_lab+1
     data.clab=current_lab

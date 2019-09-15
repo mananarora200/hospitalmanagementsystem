@@ -53,14 +53,14 @@ class Visits(models.Model):
 class Medic(models.Model):
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
     medicines=models.TextField(max_length=100)
-    price=models.CharField(max_length=10)
+    price=models.TextField(max_length=10)
     def __str__(self):
         return self.medicines
 
 class Labs(models.Model):
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
     test=models.TextField(max_length=50)
-    price=models.CharField(max_length=10)
+    price=models.TextField(max_length=10)
     def __str__(self):
         return self.test
     
