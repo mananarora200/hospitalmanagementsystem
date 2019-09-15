@@ -51,7 +51,6 @@ class Visits(models.Model):
         return str(self.case_id)
 
 class Medic(models.Model):
-    
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
     medicines=models.TextField(max_length=100)
     price=models.CharField(max_length=10)
