@@ -27,9 +27,7 @@ def homepage(request):
             "patient":data_patient,
             "case":data_case,
         }
-        current_doc = current_doc + 1
-        data.cdoc = current_doc
-        data.save()
+       
         return render(request, "doctorhome.html", context)  
 
     elif data.role == "medic":
@@ -124,9 +122,7 @@ def medicine(request):
     medicine_list = data_new.medicines.split('\n')
     context= {'medicine': medicine_list,
     }
-    current_medic=current_medic+1
-    data.cmedic=current_medic
-    data.save()
+    
     return render(request,'medicine.html',context)
     
           
@@ -138,9 +134,7 @@ def test(request):
     lab_list = data_new.test.split('\n')
     context= {'lab':lab_list,
     }
-    current_lab=current_lab+1
-    data.clab=current_lab
-    data.save()
+    
     return render(request,'lab.html',context)
 
 @login_required
@@ -199,11 +193,14 @@ def existingcase(request):
 @login_required
 def save_medic(request):
     data=Current.objects.get(id=1)
-    price=request.POST.get('price')
+    price=request.POST.get('price1')
     current_medic=data.cmedic
-    data_new=Medic.objects.get(id=current_medic-1)
+    data_new=Medic.objects.get(id=current_medic)
     data_new.price=price
     data_new.save()
+    current_medic=current_medic+1
+    data.cmedic=current_medic
+    data.save()
     return render(request,'save_medic.html')
 
 @login_required
@@ -214,6 +211,9 @@ def save_lab(request):
     data_new=Labs.objects.get(id=current_lab-1)
     data_new.price=price1
     data_new.save()
+    current_lab=current_lab+1
+    data.clab=current_lab
+    data.save()
     return render(request,'save_lab.html')
 
 
@@ -224,9 +224,7 @@ def mediocar(request):
     data_new=Visits.objects.get(id=current_visit)
     context= {'case':data_new.case,
     }
-    current_visit=current_visit+1
-    data.cvisit=current_visit
-    data.save()
+    
     return render(request,'mediocar.html',context)
 
 @login_required    
@@ -239,6 +237,9 @@ def save_mediocar(request):
     data_new.temperature=temperature
     data_new.bp=bp
     data_new.save()
+    current_visit=current_visit+1
+    data.cvisit=current_visit
+    data.save()
     return render(request,'save_mediocar.html')   
  
 
@@ -256,6 +257,9 @@ def save_doc(request):
     data_new.save()
     data_new1.save()
     data_new2.save()
+    current_doc = current_doc + 1
+    data.cdoc = current_doc
+    data.save()
     return render(request,'save_doc.html')
 
         
