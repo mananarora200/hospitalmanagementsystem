@@ -10,8 +10,6 @@ class UserProfile(models.Model):
     role = models.CharField(max_length=10,default='patient')
     birth_date = models.DateField(null=True, blank=True)
     history_completed = models.BooleanField(default=False)
-
-    
     def __str__(self):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)    
 @receiver(post_save, sender=User)
@@ -32,7 +30,6 @@ class UserHistory(models.Model):
         return "{0} {1}" .format(self.user.first_name,self.user.last_name)
 
 class Case(models.Model):
-    
     user = models.ForeignKey(User,default=1,on_delete=models.CASCADE)
     symptoms=models.CharField(max_length=60)
     disease=models.CharField(max_length=30, blank = True)
@@ -62,12 +59,12 @@ class Medic(models.Model):
         return self.medicines
 
 class Labs(models.Model):
-
     visit=models.ForeignKey(Visits,on_delete=models.CASCADE)
     test=models.TextField(max_length=50)
     price=models.CharField(max_length=10)
     def __str__(self):
         return self.test
+    
 class Current(models.Model):
     cmedic=models.IntegerField()
     clab=models.IntegerField()
