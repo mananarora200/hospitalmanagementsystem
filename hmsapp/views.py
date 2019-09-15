@@ -121,7 +121,8 @@ def medicine(request):
     data=Current.objects.get(id=1)
     current_medic=data.cmedic
     data_new=Medic.objects.get(id=current_medic)
-    context= {'medicine':data_new.medicines.split('\n'),
+    medicine_list = data_new.medicines.split('\n')
+    context= {'medicine': medicine_list,
     }
     current_medic=current_medic+1
     data.cmedic=current_medic

@@ -10,17 +10,11 @@
     <form method="POST" action="save_medic">
             {% csrf_token %}
             {%for medicine in medicine%}
-medicine={{medicine}}
-enter price:<input type="number" name="price" ><br>
-{% endfor%}
-    <input type="submit" value="save">
+            Medicine={{medicine}}
+            Enter Price: <input type="number" name="price{{ forloop.counter }}" ><br>
+            {% endfor %}
+    <input type="submit" value="Save">
 </form>
-
-<!-- <form method="POST" action="save_medic">
-    {% csrf_token %}
-    enter price:<input type="number" name="price" >
-    <input type="submit" value="save">
-</form> -->
 </div>
 
 
