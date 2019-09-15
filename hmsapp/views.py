@@ -89,7 +89,6 @@ def signup(request):
             user.userprofile.gender = form.cleaned_data.get('gender')
             user.userprofile.city = form.cleaned_data.get('city')
             user.userprofile.birth_date = form.cleaned_data.get('birth_date')
-            
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
@@ -119,7 +118,6 @@ def userhistory(request):
 
 @login_required                    
 def medicine(request):
-    
     data=Current.objects.get(id=1)
     current_medic=data.cmedic
     data_new=Medic.objects.get(id=current_medic)
@@ -135,14 +133,10 @@ def medicine(request):
 def test(request):
     i=1
     data=Current.objects.get(id=1)
-
     current_lab=data.clab
     data_new=Labs.objects.get(id=current_lab)
-    
-
     context= {'lab':data_new.test.split('\n'),
     'i':i
-    
     }
     current_lab=current_lab+1
     data.clab=current_lab
@@ -247,7 +241,7 @@ def save_mediocar(request):
     data_new.save()
     return render(request,'save_mediocar.html')   
  
- 
+
 @login_required
 def save_doc(request):
     data=Current.objects.get(id=1)
