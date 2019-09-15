@@ -9,21 +9,11 @@
         <form method="POST" action="save_lab">
                 {% csrf_token %}
                 {%for test in lab%}
-    test={{test}}
-    enter price:<input type="number" name="price{{i}}" ><br>
-    
-    {% endfor%}
+                Test={{ test }}
+                Enter Price: <input type="number" name="price{{ forloop.counter }}" ><br>
+                {% endfor %}
         <input type="submit" value="save">
     </form>
-<!-- test={{lab}}<br>
-<form method="POST" action="save_lab">
-    {% csrf_token %}
-    enter price:<input type="number" name="price" >
-    <input type="submit" value="save">
-</form> -->
 </div>
-
-
-<a class="btn btn-primary" href="/lab" role="button"  >next patient</a>
-
+<a class="btn btn-primary" href="/lab" role="button"  >Next Patient</a>
 {% endblock %}

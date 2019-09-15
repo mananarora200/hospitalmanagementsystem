@@ -132,12 +132,11 @@ def medicine(request):
           
 @login_required    
 def test(request):
-    i=1
     data=Current.objects.get(id=1)
     current_lab=data.clab
     data_new=Labs.objects.get(id=current_lab)
-    context= {'lab':data_new.test.split('\n'),
-    'i':i
+    lab_list = data_new.test.split('\n')
+    context= {'lab':lab_list,
     }
     current_lab=current_lab+1
     data.clab=current_lab
