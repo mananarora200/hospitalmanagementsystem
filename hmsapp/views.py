@@ -253,11 +253,11 @@ def save_doc(request):
     data_new=Visits.objects.get(id=current_visit)
     data_new1=Medic.objects.create(medicines = medicines, visit_id = current_visit)
     data_new2=Labs.objects.create(test = test, visit_id = current_visit)
-    data_new.disease=disease
+    data_new.disease = disease
     data_new.save()
     data_new1.save()
     data_new2.save()
-    current_doc = current_doc + 1
+    current_doc = current_visit + 1
     data.cdoc = current_doc
     data.save()
     return render(request,'save_doc.html')
