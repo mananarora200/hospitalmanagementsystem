@@ -1,15 +1,62 @@
 {% extends 'home.html' %}
 
 {% block head %}
+{% load static %}
+<link href={% static "login.css" %} type="text/css" rel="stylesheet">
 <title> login form</title>
 {% endblock %}
 
 {% block body %}
-<h1> login form</h1>
-<hr>
-<form method="POST" class="container">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="login">
-</form>
+
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                       
+                        <img src={% static "hospitalicon.png" %} class="brand_logo" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                    
+                <form method="POST" class="container">
+                        {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                       <input type="text" placeholder="phone number" name="username" maxlength="20" class="form-control input_pass" required id="id_username"></p>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        
+ <input type="password" class="form-control input_pass" placeholder="password" name="password" maxlength="100" required id="id_password"></p>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Remember me</label>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="d-flex justify-content-center mt-3 login_container">
+                    <input type="submit" value="login" class="btn login_btn">
+            
+            </div>
+        </form>
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links">
+                    Don't have an account? <a href="register" class="ml-2">Sign Up</a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href="#">Forgot your password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
