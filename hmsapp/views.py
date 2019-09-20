@@ -159,7 +159,7 @@ def createcase(request):
         if form.is_valid():
             current_case = form.save(commit=False)
             current_case.user = request.user
-            current_case.last_visit = datetime.datetime.date()
+            current_case.last_visit = datetime.date.today()
             current_case.save()
             current_visit = Visits.objects.create(current_status = current_case.symptoms, time = request.POST.get("time"), case_id = current_case.id)
             current_visit.save()
@@ -181,7 +181,7 @@ def existingcase(request):
             current_visit = form.save(commit= False)
             cname = request.POST.get('dropdown1')
             data_case = Case.objects.get(id = cname)
-            data_case.last_visit = datetime.datetime.date()
+            data_case.last_visit = datetime.date.today()
             current_visit.case_id = cname
             current_visit.save()
             data_case.save()
