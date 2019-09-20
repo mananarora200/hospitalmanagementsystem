@@ -46,6 +46,11 @@ html {
     background: #c0392b !important;
     color: white !important;
 }
+.login_btn:hover {
+    width: 100%;
+    background: maroon !important;
+    color: white !important;
+}
 .login_btn:focus {
     box-shadow: none !important;
     outline: 0px !important;
@@ -66,4 +71,7 @@ html {
 }
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
     background-color: #c0392b !important;
+}
+#sign{
+    margin-left: 5px;
 }
