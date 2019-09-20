@@ -1,17 +1,92 @@
 {% extends 'home.html' %}
 
 {% block head %}
+{% load static %}
+<link href={% static "signup.css" %} type="text/css" rel="stylesheet">
 <title> registration form</title>
 {% endblock %}
 
 {% block body %}
-<h1> Registration Form</h1>
-<hr>
+<div class="container register">
+        <form method="POST" class="container" >
+
+                {% csrf_token %}
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <h3>Welcome</h3>
+            <p>You are 30 seconds away from good health!</p>
+            <input type="submit" name="" value="Login"><br/>
+        </div>
+        
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Patient Registration</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name *"  name="first_name" maxlength="20" required id="id_first_name" value="">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name *" value="" name="last_name" maxlength="20" required id="id_last_name">
+                                
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password1" required id="id_password1" class="form-control" placeholder="Password *" value="">
+                            
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password2" required id="id_password2" placeholder="Confirm Password *" value="">
+                                
+                            </div>
+                            <div class="form-group">
+                                <div class="maxl">
+                                    <label class="radio inline"> 
+                                        <input type="radio" name="gender" value="male" maxlength="10" required id="id_gender_0" checked>
+                                        <span> Male </span> 
+                                    </label>
+                                    <label class="radio inline"> 
+                                        <input type="radio" name="gender" value="female" maxlength="10" required id="id_gender_1">
+                                        <span>Female </span> 
+                                    </label>
+                                    <label class="radio inline"> 
+                                            <input type="radio" name="gender" value="other" maxlength="10" required id="id_gender_2">
+                                            <span> Others </span> 
+                                        </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" required id="id_email" placeholder="Your Email *" value="" >
+                                
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" pattern="[0-9]{10}" name="username" maxlength="150" autofocus required id="id_username" class="form-control" placeholder="Your Phone *" value="" >
+                                
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Birth date *" value="" name="birth_date" required id="id_birth_date">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="city" maxlength="10" required id="id_city" placeholder="Enter Your City *" value="" >
+                    
+                            </div>
+                            <input type="submit" class="btnRegister"  value="submit">
+                        </div>
+                    
+                
+        
+
+
+
+
+<!-- 
 <form method="POST" class="container" >
 
     {% csrf_token %}
     <p><label for="id_first_name">First name:</label> <input type="text" name="first_name" maxlength="20" required id="id_first_name"></p>
-<p><label for="id_last_name">Last name:</label> <input type="text" name="last_name" maxlength="20" required id="id_last_name"></p>
+<p><label class="form-control" for="id_last_name">Last name:</label> <input type="text" name="last_name" maxlength="20" required id="id_last_name"></p>
 <p><label for="id_username">Phone no:</label> <input type="tel" pattern="[0-9]{10}" name="username" maxlength="150" autofocus required id="id_username"> <span class="helptext">phone no as username</span></p>
 <p><label for="id_birth_date">Birth date:</label> <input type="text" name="birth_date" required id="id_birth_date"> <span class="helptext">Required. Format: YYYY-MM-DD</span></p>
 <p><label for="id_password1">Password:</label> <input type="password" name="password1" required id="id_password1"> <span class="helptext"><ul><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul></span></p>
@@ -30,7 +105,8 @@
 
 </li>
 </ul></p>
-<p><label for="id_city">City:</label> <input type="text" name="city" maxlength="10" required id="id_city"></p>
+
+<p> <input class="form-control" type="text" name="city" placeholder="Enter your city here" maxlength="10" required id="id_city"></p>
 
 <p><label for="id_email">Email:</label> <input type="email" name="email" required id="id_email"></p>
     <input type="submit" value="submit">
@@ -38,5 +114,6 @@
 
 
     
-</form>
+</form> -->
+
 {% endblock %}
