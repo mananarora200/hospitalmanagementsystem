@@ -47,7 +47,12 @@ def homepage(request):
         return render(request,'lab.html',context)
     
     elif data.role == "mediocar":
-        return render(request, "mediocarhome.html")        
+        data=Current.objects.get(id=1)
+        current_visit=data.cvisit
+        data_new=Visits.objects.get(id=current_visit)
+        context= {'case':data_new.case,
+        }
+        return render(request,'mediocar.html',context)      
     
 
 @login_required
@@ -216,16 +221,6 @@ def save_lab(request):
     data.save()
     return render(request,'save_lab.html')
 
-
-@login_required        
-def mediocar(request):
-    data=Current.objects.get(id=1)
-    current_visit=data.cvisit
-    data_new=Visits.objects.get(id=current_visit)
-    context= {'case':data_new.case,
-    }
-    
-    return render(request,'mediocar.html',context)
 
 @login_required    
 def save_mediocar(request):
