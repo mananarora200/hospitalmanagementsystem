@@ -1,20 +1,71 @@
 {% extends "home.html" %}
 
 {% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% load static %}
+<link href={% static "patient.css" %} rel="stylesheet" type="text/css">
 
 <title>Patient Home</title>
 {% endblock %}
 
 {% block body %}
+<header>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="#"><strong>HMS</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/showpatientprofile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/showpatienthistory">History</a>
+          </li>
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+  <!-- Full Page Intro -->
+  <div class="view  jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('https://mdbootstrap.com/img/Photos/Others/gradient2.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-purple-slight d-flex justify-content-center align-items-center">
+      <!-- Content -->
+      <div class="container">
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+          <!--Grid column-->
+          <div class="col-md-12 text-center">
+            <h1 class="display-4 font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInUp" style="font-family: sans-serif;">Patient Home</h1>
+            <h5 class="pt-md-5 pt-sm-2 pt-5 pb-md-5 pb-sm-3 pb-5 wow fadeInUp" style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:25px;" data-wow-delay="0.2s">Your Doctor is just a click away!</h5>
+            <div class="wow fadeInUp" data-wow-delay="0.4s">
+              <a class="btn btn-primary case" href="/existingcase" style="padding-right:70px; text-align: center; " ><i class="fa fa-user left"></i>     Existing Case</a>
+              <a class="btn btn-primary case" href="/createcase"><i class="fa fa-book left"></i>  Create a new Case</a>
+            </div>
+           
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Content -->
+    </div>
+    <!-- Mask & flexbox options-->
+  </div>
+</header>
 
 
 
-
-
-<h1 class="container">this is homepage</h1>
-    <h2><a href="/existingcase">Existing Case</a></h2>
-    <h2><a href="/createcase">Create a new Case</a></h2>
-    <br>
-    <a href="/logout">logout</a>
 {% endblock %}

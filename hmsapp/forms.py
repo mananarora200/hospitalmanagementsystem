@@ -33,17 +33,17 @@ class SignUpForm(UserCreationForm):
 
 class HistoryForm(forms.ModelForm):
     choices1 = [
-    ('never', 'Never'),
-    ('once an year', 'Once an year'),
-    ('few times a year', 'Few times a year'),
-    ('few times a month', 'Few times a month'),
-    ('few times a week', 'Few times a week'),
-    ('daily', 'daily'),
-    ('many times a day', 'Many times a day'),    
+    ('Never', 'Never'),
+    ('Once an year', 'Once an year'),
+    ('Few times a year', 'Few times a year'),
+    ('Few times a month', 'Few times a month'),
+    ('Few times a week', 'Few times a week'),
+    ('Daily', 'daily'),
+    ('Many times a day', 'Many times a day'),    
     ]
     choices2 = [
-    ('yes', 'Yes'),
-    ('no', 'No'),
+    ('Yes', 'Yes'),
+    ('No', 'No'),
     ]
     diabetes=forms.CharField(max_length=100,label='Do you have Diabetes?', widget=forms.RadioSelect(choices=choices2))
     blood_pressure=forms.CharField(max_length=100,label='Do you have Blood Pressure Problems?', widget=forms.RadioSelect(choices=choices2))

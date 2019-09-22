@@ -1,21 +1,109 @@
 {% extends 'home.html' %}
 
 {% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% load static %}
+<link href={% static "patient.css" %} rel="stylesheet" type="text/css">
 <title>Patient History</title>
 {% endblock %}
 
 {% block body %}
-<h2 class="container">Question: Do you have diabetes?</h2>
-<h2 class="container">You Answered: {{ diabetes }}</h2>
-<h2 class="container">Question: Do you have Blood Pressure Problems?</h2>
-<h2 class="container">You Answered: {{ bp }}</h2>
-<h2 class="container">Question: Do you have Heart Problems?</h2>
-<h2 class="container">You Answered: {{ hp }}</h2>
-<h2 class="container">Question: How often do you drink?</h2>
-<h2 class="container">You Answered: {{ drink }}</h2>
-<h2 class="container">Question: How often do you smoke?</h2>
-<h2 class="container">You Answered: {{ smoke }}</h2>
-<h2 class="container">Question: How often do you take drugs?</h2>
-<h2 class="container">You Answered: {{ drugs }}</h2>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
+        <div class="container">
+          <a class="navbar-brand" href="#"><strong>HMS</strong></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/showpatientprofile">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/showpatienthistory">History</a>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+      <!-- Navbar -->
+      <!-- Full Page Intro -->
+      <div class="view  jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('https://mdbootstrap.com/img/Photos/Others/gradient2.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <!-- Mask & flexbox options-->
+        <div class="mask rgba-purple-slight d-flex justify-content-center align-items-center">
+          <!-- Content -->
+          <div class="container">
+            <!--Grid row-->
+            <div class="row wow fadeIn">
+              <!--Grid column-->
+              <div class="col-md-12 text-center">
+                <h1 class="display-4 font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInUp" style="font-family: sans-serif;">Patient History</h1>
+                
+                <div class="wow fadeInUp" data-wow-delay="0.4s"><br><br><br><br>
+                        <table class="table table-striped">
+                                <thead style="background-color:mediumorchid; ">
+                                  <tr>
+                                    <th scope="col" >Question Asked</th>
+                                    <th scope="col">You Answered</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row"> Do you have diabetes?</th>
+                                    <td> {{ diabetes }}</td>
+                                    
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Do you have Blood Pressure Problems?</th>
+                                    <td> {{ bp }}</td>
+                                    
+                                  </tr>
+                                  <tr>
+                                    <th scope="row"> Do you have Heart Problems?</th>
+                                    <td> {{ hp }}</td>
+                                    
+                                  </tr>
+                                  <tr>
+                                        <th scope="row"> How often do you drink?</th>
+                                        <td> {{ drink }}</td>
+                                        
+                                      </tr>
+                                      <tr>
+                                            <th scope="row"> How often do you smoke?</th>
+                                            <td> {{ smoke }}</td>
+                                            
+                                          </tr>
+                                          <tr>
+                                                <th scope="row"> How often do you take drugs?</th>
+                                                <td> {{ drugs }}</td>
+                                                
+                                              </tr>
+                                </tbody>
+                              </table>
+                    
+                </div>
+               
+              </div>
+              <!--Grid column-->
+            </div>
+            <!--Grid row-->
+          </div>
+          <!-- Content -->
+        </div>
+        <!-- Mask & flexbox options-->
+      </div>
+    </header>
+
 
 {% endblock %}

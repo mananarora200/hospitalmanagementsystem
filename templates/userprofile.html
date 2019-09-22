@@ -1,14 +1,110 @@
 {% extends 'home.html' %}
 
 {% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% load static %}
+<link href={% static "patient.css" %} rel="stylesheet" type="text/css">
+
 <title>Patient Profile</title>
 {% endblock %}
 
 {% block body %}
-<h2 class="container">Name: {{ name }}</h2>
-<h2 class="container">Phone Number: {{ phone }}</h2>
-<h2 class="container">Email: {{ email }}</h2>
-<h2 class="container">Date of Birth: {{ birthdate }}</h2>
-<h2 class="container">Gender: {{ gender }}</h2>
-<h2 class="container">City: {{ city }}</h2>
+<header>
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
+            <div class="container">
+              <a class="navbar-brand" href="#"><strong>HMS</strong></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/showpatientprofile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/showpatienthistory">History</a>
+                  </li>
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+          <!-- Navbar -->
+          <!-- Full Page Intro -->
+          <div class="view  jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('https://mdbootstrap.com/img/Photos/Others/gradient2.png'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+            <!-- Mask & flexbox options-->
+            <div class="mask rgba-purple-slight d-flex justify-content-center align-items-center">
+              <!-- Content -->
+              <div class="container">
+                <!--Grid row-->
+                <div class="row wow fadeIn">
+                  <!--Grid column-->
+                  <div class="col-md-12 text-center">
+                    <h1 class="display-4 font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInUp" style="font-family: sans-serif;">Patient Profile</h1>
+                    
+                    <div class="wow fadeInUp" data-wow-delay="0.4s" ><br><br><br><br>
+                            <table class="table table-striped">
+                                    <thead style="background-color:mediumorchid; font-size: 30px; ">
+                                      <tr>
+                                        <th scope="col" colspan="2">Personal Information</th> 
+                                        
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">Name: </th>
+                                        <td style="text-transform: capitalize;">{{ name }}</td>
+                                        
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Phone Number:</th>
+                                        <td>{{ phone }}</td>
+                                        
+                                      </tr>
+                                      <tr>
+                                        <th scope="row"> Email: </th>
+                                        <td> {{ email }}</td>
+                                        
+                                      </tr>
+                                      <tr>
+                                            <th scope="row">Date of Birth: </th>
+                                            <td> {{ birthdate }}</td>
+                                            
+                                          </tr>
+                                          <tr>
+                                                <th scope="row"> Gender: </th>
+                                                <td> {{ gender }}</td>
+                                                
+                                              </tr>
+                                              <tr>
+                                                    <th scope="row">City:</th>
+                                                    <td> {{ city }}</td>
+                                                    
+                                                  </tr>
+                                    </tbody>
+                                  </table>
+                        
+                    </div>
+                   
+                  </div>
+                  <!--Grid column-->
+                </div>
+                <!--Grid row-->
+              </div>
+              <!-- Content -->
+            </div>
+            <!-- Mask & flexbox options-->
+          </div>
+        </header>
+
+
+
 {% endblock %}
