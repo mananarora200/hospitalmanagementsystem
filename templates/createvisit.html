@@ -1,17 +1,32 @@
 {% extends 'home.html' %}
 
 {% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% load static %}
+<link href = {% static "medic_lab.css" %} rel = "stylesheet" type = "text/css">
 <title> Visit form </title>
 {% endblock %}
 
 {% block body %}
-<h1>Create Visit</h1>
-<hr>
-<form method="POST" class="container">
-    {% csrf_token %}
-    {{form.as_p}}
-    <div class="form-group">
-    <label for="exampleFormControlSelect1">Existing cases</label>
+<div class="container" style="padding-top: 40px;">
+    
+    <form method="POST" class="container">
+        {% csrf_token %}
+            <div class="container register-form" style = "margin-top: 20px;">
+                <div class="form">
+                    <div class="note">
+                        <p style = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 30px;">Create Your Visit</p>
+                    </div>
+            
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p><label for="id_current_status" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Current status:</label> <input type="text" class="form-control" name="current_status" maxlength="60" required id="id_current_status"></p>
+<p><label for="id_time" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Time:</label> <input class="form-control" type="text" name="time" value="00:00" required id="id_time"></p>
+    
+    <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Existing cases:</label>
     <select class="form-control" id="exampleFormControlSelect1" name="dropdown1">
          {% for case in cases %}
           <option value="{{ case.id }}">
@@ -21,6 +36,21 @@
           {% endfor %}
           
         </select>
-    <input type="submit" value="Submit">
+                            </div>
+                        </div><br><br>
+                        <center>
+                                <a class="btn btnSubmit" href="/" role="button">Back</a>
+                            <input class="btnSubmit" type="submit" value="Submit">
+                        </center>
+                    </div>
+                </div>
+            </div>
 </form>
+</div>
+
+
+
+
 {% endblock %}
+
+
