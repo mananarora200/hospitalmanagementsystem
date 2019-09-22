@@ -29,3 +29,19 @@ header,
     background: #f8bbd0 !important;
   }
 }
+.case{
+  background-color: blueviolet;
+  border-radius: 30px;
+  font-size: 25px;
+  margin: 20px;
+  padding: 10px;
+}
+.case:hover{
+  background-color: purple;
+  border-radius: 30px;
+  font-size: 25px;
+  margin: 20px;
+}
+table{
+  font-size: 20px;
+}
