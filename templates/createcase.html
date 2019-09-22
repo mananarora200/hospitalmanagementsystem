@@ -10,7 +10,8 @@
 {% endblock %}
 
 {% block body %}
-<div class="container" style="padding-top: 40px;">
+<body  background={% static "gradient.jpg" %} >
+        <div class="container" style="padding-top: 40px; background-color: white;" >
     
         <form method="POST" class="container">
                 {% csrf_token %}
