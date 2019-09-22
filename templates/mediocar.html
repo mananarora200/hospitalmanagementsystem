@@ -1,21 +1,49 @@
 {% extends 'home.html' %}
 
 {% block head %}
-<title>Mediocar</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% load static %}
+<link href = {% static "medic_lab.css" %} rel = "stylesheet" type = "text/css">
+<title>Mediocre</title>
 {% endblock %}
 
 {% block body %}
-<div class="container">
-case={{case}}<br>
-<form method="POST" action="save_mediocar">
-    {% csrf_token %}
-    temprature:<input type="number" name="temperature" >
-    bp:<input type="text" name="bp" >
-    <input type="submit" value="save">
+<body  background={% static "gradient.jpg" %} >
+    <div class="container" style="padding-top: 40px; background-color: white;" >
+
+        <form method="POST" action="save_mediocar">
+            {% csrf_token %}
+            <div class="container register-form" style = "margin-top: 20px;">
+                <div class="form">
+                    <div class="note">
+                        <p style = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 30px;">Please enter the following details</p>
+                    </div>
+                    <div class="form-content">
+                            
+                            
+                    
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Patient Name:</label><input class="form-control" value=" {{case.user.first_name}} {{case.user.last_name}}" style="text-transform: capitalize;" disabled></p>
+                                    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Temperature:</label><input type="number" class="form-control" name="temperature" ></p>
+                                        <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Blood Pressure:</label><input type="text" class="form-control" name="bp" ></p>
+                                    
+                            </div>
+                        </div><br><br>
+                        <center>
+                                
+<a class="btnSubmit btn" href="/" role="button">Next Patient</a>
+                                <input class="btnSubmit" type="submit" value="Save">
+                                
+                            
+                        </center>
+                    </div>
+                </div>
+            </div>
 </form>
 </div>
 
-
-<a class="btn btn-primary" href="/mediocar" role="button"  >next patient</a>
 
 {% endblock %}

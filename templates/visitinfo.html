@@ -1,0 +1,18 @@
+{% extends "home.html" %}
+
+{% block head %}
+<title>Visit Info</title>
+{% endblock %}
+
+{% block body %}
+<div class="container"><h1>Visit Information</h1>
+    {{ visit.current_status }}
+    {{ visit.progress }}
+    {% for medicine in medicines %}
+    {{medicine}}
+    {% endfor %}
+    {% for test in lab %}
+    {{test}}
+    {% endfor %}
+</div>
+{% endblock %}

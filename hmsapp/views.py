@@ -257,6 +257,17 @@ def save_doc(request):
     data.save()
     return render(request,'save_doc.html')
 
-        
+@login_required
+def visit_info(request):
+    visit = request.POST.get("visit")
+    data = Visits.objects.get(id = visit)
+    data_lab = Labs.objects.get(visit = visit)
+    data_medic = Medic.objects.get(visit = visit)
+    lab_list = data_lab.test.split('\n')
+    medicine_list = data_medic.medicines.split('\n')
+    context = {"visit":data,
+    "medicine":medicine_list,
+    "lab":lab_list}
+    return render(request, "visitinfo.html", context)  
 
 

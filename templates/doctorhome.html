@@ -1,46 +1,88 @@
 {% extends "home.html" %}
 
 {% block head %}
+{% load static %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src={% static "doctor.js" %}></script>
 <title>Doctor Home</title>
+<link href = {% static "doctor.css" %} rel = "stylesheet" type = "text/css">
 {% endblock %}
 
 {% block body %}
 
-<div class="container">
-<h1 class="container">Patient Profile</h1>
-<h2>Name: {{ patient.first_name }} {{ patient.last_name }}</h2>
-<h2>Date of Birth:</h2> {{ profile.birth_date }}
-<h2>Gender:</h2> {{ profile.gender }}
-</div>
-<div class="container">
-<h1 class="container">Patient History</h1>
-<h2>Diabetes:</h2>{{ history.diabetes }}
-<h2>Blood Problems:</h2>{{ history.blood_pressure }}
-<h2>Heart Problems:</h2>{{ history.heart_problems }}
-<h2>Drink:</h2>{{ history.drink }}
-<h2>Smoke:</h2>{{ history.smoke }}
-<h2>Drugs:</h2>{{ history.drugs }}
-</div>
-<div class="container">Current Visit</div>
-<h2>Symptoms: </h2> {{ visit.current_status }}
-<h2>Temperature: </h2> {{ visit.temperature }}
-<h2>Blood Pressure: </h2> {{ visit.bp }}
-<form method="POST" action="save_doc">
-        {% csrf_token %}
- Disease: <input type="text" name="disease">
- <!-- medicine:<input type="text" name="medicines">
- test: <input type="text" name="test"> -->
- <div class="form-group">
-        <label for="exampleFormControlTextarea1">Medicine:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="medicines"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Test</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="test"></textarea>
-      </div>
-<input type="submit" value="save">
+<body background={% static "doctor.jpg" %}>
+<div class="container" >
+    <div class="row">
+        <div class="col-lg-12 my-3">
+            <div class="pull-right">
+                
+            </div>
+        </div>
+    </div> 
+    <div id="products" class="row view-group" >
+                <div class="item col-xs-6 col-lg-6" >
+                    <div class="thumbnail card" style="border-radius: 20px;">
+                        
+                        <div class="caption card-body">
+                            <center><h4 class="group card-title inner list-group-item-heading">
+                                Patient Information</h4></center><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Patient Name:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ patient.first_name }} {{ patient.last_name }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Date of Birth:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ profile.birth_date }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Diabetes:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value="{{ history.diabetes }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Blood Problems:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ history.blood_pressure }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Heart Problems:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ history.heart_problems }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Drink:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ history.drink }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Smoke:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value="  {{ history.smoke }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                                <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Drugs:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ history.drugs }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+ </div>
+                    </div>
+                </div>
+                
+                <div class="item col-xs-6 col-lg-6">
+                    <div class="thumbnail card" style="border-radius: 20px;">
+                        
+                        <div class="caption card-body">
+                            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Symptoms:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.current_status }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Temperature:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.temperature }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                            <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Blood Pressure:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.bp }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
+                            <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;">Existing cases:</label>
+   <span style="display: block; overflow: hidden;padding: 0 4px 0 6px;" > <select class="form-control" style="border-radius: 20px;" id="exampleFormControlSelect1" name="dropdown1">
+         {% for case in cases %}
+          <option value="{{ case.id }}">
+                {{ case.symptoms }}
+                {{ case.starting_date }}
+          </option>
+          {% endfor %}</select></span><br>
+                            <div class="form-group">
+                                <form method="POST" action="save_doc">
+                                    {% csrf_token %}
+                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Disease:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" type="text" name="disease" style="width: 100%; border-radius: 20px;" ></span><br>
+                                    
+                                
+                                <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Medicine:</label>
+                                <textarea class="form-control" style="border-radius: 20px;" id="exampleFormControlTextarea1" rows="3" name="medicines"></textarea>
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Test:</label>
+                               
+                                <textarea class="form-control" style="border-radius: 20px;" id="exampleFormControlTextarea1" rows="3" name="test"></textarea>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+            </div>
+            <center>
+            <input type="submit" class="btnSubmit" value="save">
+            <a href="/logout" class="btn btnSubmit">Logout</a>
+          </center>
 </form>
 <br>
-    
-<a href="/logout" class = "btn btn-default">Logout</a>
+  
+</div>
+
+
 {% endblock %}
