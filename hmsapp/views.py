@@ -28,13 +28,24 @@ def homepage(request):
             "patient":data_patient,
             "case":data_case,
         }
-       
         return render(request, "doctorhome.html", context)  
 
     elif data.role == "medic":
-        return render(request, "medic.html")
+        data=Current.objects.get(id=1)
+        current_medic=data.cmedic
+        data_new=Medic.objects.get(id=current_medic)
+        medicine_list = data_new.medicines.split('\n')
+        context= {'medicine': medicine_list,}
+        return render(request,'medicine.html',context)
+    
     elif data.role == "lab":
-        return render(request, "lab.html") 
+        data=Current.objects.get(id=1)
+        current_lab=data.clab
+        data_new=Labs.objects.get(id=current_lab)
+        lab_list = data_new.test.split('\n')
+        context= {'lab':lab_list,}
+        return render(request,'lab.html',context)
+    
     elif data.role == "mediocar":
         return render(request, "mediocarhome.html")        
     
@@ -113,30 +124,7 @@ def userhistory(request):
     else:
         form = HistoryForm()
     return render(request,'history.html',context={'form':form})
-
-
-@login_required                    
-def medicine(request):
-    data=Current.objects.get(id=1)
-    current_medic=data.cmedic
-    data_new=Medic.objects.get(id=current_medic)
-    medicine_list = data_new.medicines.split('\n')
-    context= {'medicine': medicine_list,
-    }
-    
-    return render(request,'medicine.html',context)
-    
-          
-@login_required    
-def test(request):
-    data=Current.objects.get(id=1)
-    current_lab=data.clab
-    data_new=Labs.objects.get(id=current_lab)
-    lab_list = data_new.test.split('\n')
-    context= {'lab':lab_list,
-    }
-    
-    return render(request,'lab.html',context)
+  
 
 @login_required
 def showpatientprofile(request):
