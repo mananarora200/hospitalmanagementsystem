@@ -7,13 +7,14 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src={% static "doctor.js" %}></script>
 <title>Doctor Home</title>
+<link href = {% static "medic_lab.css" %} rel = "stylesheet" type = "text/css">
 <link href = {% static "doctor.css" %} rel = "stylesheet" type = "text/css">
 {% endblock %}
 
 {% block body %}
-
-<body background={% static "doctor.jpg" %}>
-<div class="container" >
+<body  background={% static "gradient.jpg" %} >
+    
+<div class="container" style="margin-top:0px;">
     <div class="row">
         <div class="col-lg-12 my-3">
             <div class="pull-right">
@@ -41,46 +42,44 @@
                 </div>
                 
                 <div class="item col-xs-6 col-lg-6">
-                    <div class="thumbnail card" style="border-radius: 20px;">
-                        
+                    <div class="thumbnail card" style="border-radius: 20px; padding-bottom: 0px;" >
                         <div class="caption card-body">
                             <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Symptoms:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.current_status }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
                             <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Temperature:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.temperature }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
                             <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Blood Pressure:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.bp }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
-                            <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;">Existing cases:</label>
-   <span style="display: block; overflow: hidden;padding: 0 4px 0 6px;" > <select class="form-control" style="border-radius: 20px;" id="exampleFormControlSelect1" name="dropdown1">
-         {% for case in cases %}
-          <option value="{{ case.id }}">
-                {{ case.symptoms }}
-                {{ case.starting_date }}
+                            <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;">Existing Visits:</label>
+   <span style="display: block; overflow: hidden;padding: 0 4px 0 6px;" > <form method="POST" action="visitinfo">
+       {% csrf_token %}
+    <select class="form-control" style="border-radius: 20px;" id="exampleFormControlSelect1" name="dropdown2">
+         {% for visit in visits_of_case %}
+          <option value="{{ visit.id }}">
+                {{ visit.date }}
           </option>
-          {% endfor %}</select></span><br>
-                            <div class="form-group">
+          {% endfor %}</select></span><center><input type="submit" value="Submit" class="btnSubmit" style=" padding: 5px 20px 5px 9px;  margin:20px 0px ;"></center>
+        </form> </div>
                                 <form method="POST" action="save_doc">
-                                    {% csrf_token %}
-                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Disease:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" type="text" name="disease" style="width: 100%; border-radius: 20px;" ></span><br>
+                                    {% csrf_token %}<div class="form-group" style="margin-left: 20px; margin-right: 20px;">
+                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Disease:</label><span style=" display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" type="text" name="disease" style="width: 100%; border-radius: 20px;" ></span><br>
                                     
-                                
-                                <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Medicine:</label>
-                                <textarea class="form-control" style="border-radius: 20px;" id="exampleFormControlTextarea1" rows="3" name="medicines"></textarea>
-                              </div>
-                              <div class="form-group">
-                                  <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Test:</label>
-                               
-                                <textarea class="form-control" style="border-radius: 20px;" id="exampleFormControlTextarea1" rows="3" name="test"></textarea>
+                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Medicine:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><textarea id="exampleFormControlTextarea1" class="form-control" type="text" rows="2" name="medicines" style="width: 100%; border-radius: 20px;" ></textarea></span><br>
+                                    </div>
+                              
+                              <div class="form-group" style="margin-left: 20px; margin-bottom: 11px; margin-right: 20px;">
+                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Test:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><textarea id="exampleFormControlTextarea1"  class="form-control" type="text" rows="2" name="test" style="width: 100%; border-radius: 20px;" ></textarea></span><br>
+                                  
                               </div>
                         </div>
                     </div>
-                </div>
+                
                 
                
             </div>
-            <center>
-            <input type="submit" class="btnSubmit" value="save">
-            <a href="/logout" class="btn btnSubmit">Logout</a>
+                        <center>
+            <input type="submit" class="btnSubmit" style="padding:10px 40px 10px 40px; margin:0px 10px;" value="Save">
+            <a href="/logout" class="btn btnSubmit" style="padding:10px 40px 10px 40px; margin:0px 10px;;">Logout</a>
           </center>
 </form>
-<br>
+
   
 </div>
 

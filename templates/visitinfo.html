@@ -6,11 +6,14 @@
 
 {% block body %}
 <div class="container"><h1>Visit Information</h1>
+    <h1 class="container">Visit info:</h1>
     {{ visit.current_status }}
     {{ visit.progress }}
+    <h1 class="container">Medicines:</h1>
     {% for medicine in medicines %}
     {{medicine}}
     {% endfor %}
+    <h1 class="container">Tests:</h1>
     {% for test in lab %}
     {{test}}
     {% endfor %}

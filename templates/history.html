@@ -2,348 +2,182 @@
 
 {% block head %}
 {% load static %}
-<link href={% static "history.css" %} type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href={% static "history.css" %}>
+<link href = {% static "medic_lab.css" %} rel = "stylesheet" type = "text/css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src={% static "history.js" %}
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <title>Patient History</title>
 {% endblock %}
 
 {% block body %}
-<!-- <form class="container" method="POST">
-    {% csrf_token %}
-    <p><label for="id_diabetes_0">Do you have Diabetes?</label> <ul id="id_diabetes">
-    <li><label for="id_diabetes_0"><input type="radio" name="diabetes" value="yes" maxlength="100" required id="id_diabetes_0">
- Yes</label>
+<body  background={% static "gradient.jpg" %} >
+        <div class="note" style="margin: 25px 0px;">
+                <p style = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 30px;">Please fill this history form before we begin.</p>
+            </div>
+<div class="container" style="width: 700px; margin-bottom: 50px; background-color:white; padding: 20px; border: 2px solid lightgrey; border-radius: 20px; " >
+        <form  method="POST">
+                {% csrf_token %}
+    <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_diabetes_0">Do you have Diabetes?</label></h4>
 
-</li>
-    <li><label for="id_diabetes_1"><input type="radio" name="diabetes" value="no" maxlength="100" required id="id_diabetes_1">
- No</label>
-
-</li>
-</ul></p>
-<p><label for="id_blood_pressure_0">Do you have Blood Pressure Problems?</label> <ul id="id_blood_pressure">
-    <li><label for="id_blood_pressure_0"><input type="radio" name="blood_pressure" value="yes" maxlength="100" required id="id_blood_pressure_0">
- Yes</label>
-
-</li>
-    <li><label for="id_blood_pressure_1"><input type="radio" name="blood_pressure" value="no" maxlength="100" required id="id_blood_pressure_1">
- No</label>
-
-</li>
-</ul></p>
-<p><label for="id_heart_problems_0">Do you have have Heart Problems?</label> <ul id="id_heart_problems">
-    <li><label for="id_heart_problems_0"><input type="radio" name="heart_problems" value="yes" maxlength="100" required id="id_heart_problems_0">
- Yes</label>
-
-</li>
-    <li><label for="id_heart_problems_1"><input type="radio" name="heart_problems" value="no" maxlength="100" required id="id_heart_problems_1">
- No</label>
-
-</li>
-</ul></p>
-<p><label for="id_drink_0">How often do you have alcohol?</label> <ul id="id_drink">
-    <li><label for="id_drink_0"><input type="radio" name="drink" value="never" maxlength="100" required id="id_drink_0">
- Never</label>
-
-</li>
-    <li><label for="id_drink_1"><input type="radio" name="drink" value="once an year" maxlength="100" required id="id_drink_1">
- Once an year</label>
-
-</li>
-    <li><label for="id_drink_2"><input type="radio" name="drink" value="few times a year" maxlength="100" required id="id_drink_2">
- Few times a year</label>
-
-</li>
-    <li><label for="id_drink_3"><input type="radio" name="drink" value="few times a month" maxlength="100" required id="id_drink_3">
- Few times a month</label>
-
-</li>
-    <li><label for="id_drink_4"><input type="radio" name="drink" value="few times a week" maxlength="100" required id="id_drink_4">
- Few times a week</label>
-
-</li>
-    <li><label for="id_drink_5"><input type="radio" name="drink" value="daily" maxlength="100" required id="id_drink_5">
- daily</label>
-
-</li>
-    <li><label for="id_drink_6"><input type="radio" name="drink" value="many times a day" maxlength="100" required id="id_drink_6">
- Many times a day</label>
-
-</li>
-</ul></p>
-<p><label for="id_smoke_0">How often do you smoke?</label> <ul id="id_smoke">
-    <li><label for="id_smoke_0"><input type="radio" name="smoke" value="never" maxlength="100" required id="id_smoke_0">
- Never</label>
-
-</li>
-    <li><label for="id_smoke_1"><input type="radio" name="smoke" value="once an year" maxlength="100" required id="id_smoke_1">
- Once an year</label>
-
-</li>
-    <li><label for="id_smoke_2"><input type="radio" name="smoke" value="few times a year" maxlength="100" required id="id_smoke_2">
- Few times a year</label>
-
-</li>
-    <li><label for="id_smoke_3"><input type="radio" name="smoke" value="few times a month" maxlength="100" required id="id_smoke_3">
- Few times a month</label>
-
-</li>
-    <li><label for="id_smoke_4"><input type="radio" name="smoke" value="few times a week" maxlength="100" required id="id_smoke_4">
- Few times a week</label>
-
-</li>
-    <li><label for="id_smoke_5"><input type="radio" name="smoke" value="daily" maxlength="100" required id="id_smoke_5">
- daily</label>
-
-</li>
-    <li><label for="id_smoke_6"><input type="radio" name="smoke" value="many times a day" maxlength="100" required id="id_smoke_6">
- Many times a day</label>
-
-</li>
-</ul></p>
-<p><label for="id_drugs_0">How often do you have drugs?</label> <ul id="id_drugs">
-    <li><label for="id_drugs_0"><input type="radio" name="drugs" value="never" maxlength="100" required id="id_drugs_0">
- Never</label>
-
-</li>
-    <li><label for="id_drugs_1"><input type="radio" name="drugs" value="once an year" maxlength="100" required id="id_drugs_1">
- Once an year</label>
-
-</li>
-    <li><label for="id_drugs_2"><input type="radio" name="drugs" value="few times a year" maxlength="100" required id="id_drugs_2">
- Few times a year</label>
-
-</li>
-    <li><label for="id_drugs_3"><input type="radio" name="drugs" value="few times a month" maxlength="100" required id="id_drugs_3">
- Few times a month</label>
-
-</li>
-    <li><label for="id_drugs_4"><input type="radio" name="drugs" value="few times a week" maxlength="100" required id="id_drugs_4">
- Few times a week</label>
-
-</li>
-    <li><label for="id_drugs_5"><input type="radio" name="drugs" value="daily" maxlength="100" required id="id_drugs_5">
- daily</label>
-
-</li>
-    <li><label for="id_drugs_6"><input type="radio" name="drugs" value="many times a day" maxlength="100" required id="id_drugs_6">
- Many times a day</label>
-
-</li>
-</ul></p>
-    <input type="submit" class="btn btn-default">
-</form> -->
-<div class="container-fluid bg-info">
-    <div class="modal-dialog">
-      <div class="modal-content">
-            
-         <div class="modal-header">
-                <form class="container" method="POST">
-                        {% csrf_token %}
-                
-            <h3><span class="label label-warning" id="qid">1</span> <label for="id_diabetes_0">Do you have Diabetes?</label> </h3>
-            
+   <div class="funkyradio">
+       <div class="funkyradio-primary">
+            <input type="radio" name="diabetes" style="border-radius: 0px 20px 20px 0px !important;" value="Yes" maxlength="100" required id="id_diabetes_0">
+            <label for="id_diabetes_0">
+                Yes</label></label>
+       </div>
+       <div class="funkyradio-primary">
+            <input type="radio" name="diabetes" value="No" maxlength="100" required id="id_diabetes_1">
+            <label for="id_diabetes_1">No</label>
+       
+   </div><br></div>
+   <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_blood_pressure_0">Do you have Blood Pressure Problems?</label></h4>
+   <div class="funkyradio">
+        <div class="funkyradio-primary">
+                <input type="radio" name="blood_pressure" value="Yes" maxlength="100" required id="id_blood_pressure_0">
+                <label for="id_blood_pressure_0">
+                 Yes</label></label>
         </div>
-        <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-
-          <div class="quiz" id="quiz" data-toggle="buttons">
-           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_diabetes_0"><input type="radio" name="diabetes" value="yes" maxlength="100" required id="id_diabetes_0">
-            Yes</label></label>
-           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_diabetes_1"><input type="radio" name="diabetes" value="no" maxlength="100" required id="id_diabetes_1">
-            No</label></label>
-           
-       </div>
-       
-   </div>
-   <div class="modal-header">
-        <h3><span class="label label-warning" id="qid">1</span><label for="id_blood_pressure_0">Do you have Blood Pressure Problems?</label> </h3>
+        <div class="funkyradio-primary">
+                <input type="radio" name="blood_pressure" value="No" maxlength="100" required id="id_blood_pressure_1">
+                <label for="id_blood_pressure_1">No</label>
         
-    </div>
-    <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-
-          <div class="quiz" id="quiz" data-toggle="buttons">
-           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_blood_pressure_0"><input type="radio" name="blood_pressure" value="yes" maxlength="100" required id="id_blood_pressure_0">
-            Yes</label></label>
-           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_blood_pressure_1"><input type="radio" name="blood_pressure" value="no" maxlength="100" required id="id_blood_pressure_1">
-            No</label></label>
-           
-       </div>
-       
-   </div>
-   <div class="modal-header">
-        <h3><span class="label label-warning" id="qid">1</span><label for="id_heart_problems_0">Do you have have Heart Problems?</label>  </h3>
-        
-    </div>
-    <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-          <div class="quiz" id="quiz" data-toggle="buttons">
-                <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_heart_problems_0"><input type="radio" name="heart_problems" value="yes" maxlength="100" required id="id_heart_problems_0">
-                    Yes</label>
-                   </label>
-                <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_heart_problems_1"><input type="radio" name="heart_problems" value="no" maxlength="100" required id="id_heart_problems_1">
-                    No</label></label>
+    </div><br></div>
+    <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_heart_problems_0">Do you have have Heart Problems?</label></h4>
+    <div class="funkyradio">
+            <div class="funkyradio-primary">
+                    <input type="radio" name="heart_problems" value="Yes" maxlength="100" required id="id_heart_problems_0">
+                    
+                   
+                    <label for="id_heart_problems_0">
+                     Yes</label></label>
+            </div>
+            <div class="funkyradio-primary">
+                    <input type="radio" name="heart_problems" value="No" maxlength="100" required id="id_heart_problems_1">
+                    <label for="id_heart_problems_1">No</label>
+            
+        </div><br></div>
+        <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_drink_0">How often do you have alcohol?</label></h4>
+        <div class="funkyradio">
+                <div class="funkyradio-primary">
+                        <input type="radio" name="drink" value="Never" maxlength="100" required id="id_drink_0">
+                        <label for="id_drink_0">
+                         Never</label></label>
+                </div>
+                <div class="funkyradio-primary">
+                        <input type="radio" name="drink" value="Once an year" maxlength="100" required id="id_drink_1">
+                        <label for="id_drink_1">Once an year</label>
                 
             </div>
-       
-   </div>
-   <div class="modal-header">
-        <h3><span class="label label-warning" id="qid">1</span><label for="id_drink_0">How often do you have alcohol?</label> <ul id="id_drink"> </h3>
+            <div class="funkyradio-primary">
+                    <input type="radio" name="drink" value="Few times a year" maxlength="100" required id="id_drink_2">
+                    <label for="id_drink_2">Few times a year</label>
+            
+        </div>
+        <div class="funkyradio-primary">
+                <input type="radio" name="drink" value="Few times a month" maxlength="100" required id="id_drink_3">
+                <label for="id_drink_3">Few times a month</label>
         
     </div>
-    <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-
-          <div class="quiz" id="quiz" data-toggle="buttons">
-           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_drink_0"><input type="radio" name="drink" value="never" maxlength="100" required id="id_drink_0">
-            Never</label></label>
-           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_1"><input type="radio" name="drink" value="once an year" maxlength="100" required id="id_drink_1">
-            Once an year</label></label>
-            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_2"><input type="radio" name="drink" value="few times a year" maxlength="100" required id="id_drink_2">
-                Few times a year</label></label>
-                <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_3"><input type="radio" name="drink" value="few times a month" maxlength="100" required id="id_drink_3">
-                    Few times a month</label></label> 
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_4"><input type="radio" name="drink" value="few times a week" maxlength="100" required id="id_drink_4">
-                        Few times a week</label></label>
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_5"><input type="radio" name="drink" value="daily" maxlength="100" required id="id_drink_5">
-                        daily</label></label>  
-                        <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drink_6"><input type="radio" name="drink" value="many times a day" maxlength="100" required id="id_drink_6">
-                            Many times a day</label></label>                           
-           
-       </div>
-       
-   </div>
-   <div class="modal-header">
-        <h3><span class="label label-warning" id="qid">1</span><label for="id_smoke_0">How often do you smoke?</label> </h3>
-        
-    </div>
-    <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-
-          <div class="quiz" id="quiz" data-toggle="buttons">
-                <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_smoke_0"><input type="radio" name="smoke" value="never" maxlength="100" required id="id_smoke_0">
-                    Never</label></label>
-                   <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_1"><input type="radio" name="smoke" value="once an year" maxlength="100" required id="id_smoke_1">
-                    Once an year</label></label>
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_2"><input type="radio" name="smoke" value="few times a year" maxlength="100" required id="id_smoke_2">
-                        Few times a year</label></label>
-                        <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_3"><input type="radio" name="smoke" value="few times a month" maxlength="100" required id="id_smoke_3">
-                            Few times a month</label></label> 
-                            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_4"><input type="radio" name="smoke" value="few times a week" maxlength="100" required id="id_smoke_4">
-                                Few times a week</label></label>
-                            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_5"><input type="radio" name="smoke" value="daily" maxlength="100" required id="id_smoke_5">
-                                daily</label></label>  
-                                <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_smoke_6"><input type="radio" name="smoke" value="many times a day" maxlength="100" required id="id_smoke_6">
-                                    Many times a day</label></label>
-           
-       </div>
-       
-   </div>
-   <div class="modal-header">
-        <h3><span class="label label-warning" id="qid">1</span><label for="id_drugs_0">How often do you have drugs?</label> </h3>
-        
-    </div>
-    <div class="modal-body">
-            <div class="col-xs-3 col-xs-offset-5">
-               <div id="loadbar" style="display: none;">
-                  <div class="blockG" id="rotateG_01"></div>
-                  <div class="blockG" id="rotateG_02"></div>
-                  <div class="blockG" id="rotateG_03"></div>
-                  <div class="blockG" id="rotateG_04"></div>
-                  <div class="blockG" id="rotateG_05"></div>
-                  <div class="blockG" id="rotateG_06"></div>
-                  <div class="blockG" id="rotateG_07"></div>
-                  <div class="blockG" id="rotateG_08"></div>
-              </div>
-          </div>
-
-          <div class="quiz" id="quiz" data-toggle="buttons">
-                <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <label for="id_drugs_0"><input type="radio" name="drugs" value="never" maxlength="100" required id="id_drugs_0">
-                    Never</label></label>
-                   <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_1"><input type="radio" name="drugs" value="once an year" maxlength="100" required id="id_drugs_1">
-                    Once an year</label></label>
-                    <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_2"><input type="radio" name="drugs" value="few times a year" maxlength="100" required id="id_drugs_2">
-                        Few times a year</label></label>
-                        <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_3"><input type="radio" name="drugs" value="few times a month" maxlength="100" required id="id_drugs_3">
-                            Few times a month</label></label> 
-                            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_4"><input type="radio" name="drugs" value="few times a week" maxlength="100" required id="id_drugs_4"> Few times a week</label></label>
-                            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_5"><input type="radio" name="drugs" value="daily" maxlength="100" required id="id_drink_5">
-                                daily</label></label>  
-                                <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><label for="id_drugs_6"><input type="radio" name="drugs" value="many times a day" maxlength="100" required id="id_drugs_6">
-                                    Many times a day</label></label>
-           
-       </div>
-       
-   </div>
-   <input type="submit" class="btn btn-default">
-</form>
-   
-   
-   <!-- <div class="modal-footer text-muted">
-    <span id="answer"></span> -->
-   
+    <div class="funkyradio-primary">
+            <input type="radio" name="drink" value="Few times a week" maxlength="100" required id="id_drink_4">
+            <label for="id_drink_4">Few times a week</label>
+    
 </div>
+<div class="funkyradio-primary">
+        <input type="radio" name="drink" value="Daily" maxlength="100" required id="id_drink_5">
+        <label for="id_drink_5">Daily</label>
 
 </div>
+<div class="funkyradio-primary">
+        <input type="radio" name="drink" value="Many times a day" maxlength="100" required id="id_drink_1">
+        <label for="id_drink_1">Many times a day</label>
+
 </div>
+            <br></div>
+            <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_smoke_0">How often do you smoke?</label></h4>
+            <div class="funkyradio">
+                    <div class="funkyradio-primary">
+                            <input type="radio" name="smoke" value="Never" maxlength="100" required id="id_smoke_0">
+                         <label for="id_smoke_0">
+                             Never</label></label>
+                    </div>
+                    <div class="funkyradio-primary">
+                        <input type="radio" name="smoke" value="Once an year" maxlength="100" required id="id_smoke_1">
+                         <label for="id_smoke_1">
+                             Once an year</label></label>
+                    </div>
+                    <div class="funkyradio-primary">
+                            <input type="radio" name="smoke" value="Few times a year" maxlength="100" required id="id_smoke_2">
+                         <label for="id_smoke_2">
+                             Few times a year</label></label>
+                         </div>
+                         <div class="funkyradio-primary">
+                                <input type="radio" name="smoke" value="Few times a month" maxlength="100" required id="id_smoke_3">
+                             <label for="id_smoke_3">
+                                 Few times a month</label></label>
+                             </div>
+                             <div class="funkyradio-primary">
+                                    <input type="radio" name="smoke" value="Few times a week" maxlength="100" required id="id_smoke_4">
+                                 <label for="id_smoke_4">
+                                     Few times a week</label></label>
+                                 </div>
+                                 <div class="funkyradio-primary">
+                                        <input type="radio" name="smoke" value="Daily" maxlength="100" required id="id_smoke_5">
+                                     <label for="id_smoke_5">
+                                         Daily</label></label>
+                                     </div>
+                                     <div class="funkyradio-primary">
+                                            <input type="radio" name="smoke" value="Many times a day" maxlength="100" required id="id_smoke_6">
+                                         <label for="id_smoke_6">
+                                             Many times a day</label></label>
+                                         </div>
+                    <br></div>
+                <h4 style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><label for="id_drugs_0">How often do you have drugs?</label></h4>
+                <div class="funkyradio">
+                        <div class="funkyradio-primary">
+                                <input type="radio" name="drugs" value="Never" maxlength="100" required id="id_drugs_0">
+                             <label for="id_drugs_0">
+                                 Never</label></label>
+                        </div>
+                        <div class="funkyradio-primary">
+                                <input type="radio" name="drugs" value="Once an year" maxlength="100" required id="id_drugs_1">
+                             <label for="id_drugs_1">
+                                 Once an year</label></label>
+                        </div>
+                        <div class="funkyradio-primary">
+                                <input type="radio" name="drugs" value="Few times a year" maxlength="100" required id="id_drugs_2">
+                             <label for="id_drugs_2">
+                                 Few times a year</label></label>
+                             </div>
+                             <div class="funkyradio-primary">
+                                    <input type="radio" name="drugs" value="Few times a month" maxlength="100" required id="id_drugs_3">
+                                 <label for="id_drugs_3">
+                                     Few times a month</label></label>
+                                 </div>
+                                 <div class="funkyradio-primary">
+                                        <input type="radio" name="drugs" value="Few times a week" maxlength="100" required id="id_drugs_4">
+                                     <label for="id_drugs_4">
+                                         Few times a week</label></label>
+                                     </div>
+                                     <div class="funkyradio-primary">
+                                            <input type="radio" name="drugs" value="Daily" maxlength="100" required id="id_drugs_5">
+                                         <label for="id_drugs_5">
+                                             Daily</label></label>
+                                         </div>
+                                         <div class="funkyradio-primary">
+                                                <input type="radio" name="drugs" value="Many times a day" maxlength="100" required id="id_drugs_6">
+                                             <label for="id_drugs_6">
+                                                 Many times a day</label></label>
+                                             </div><center>
+                                             <input type="submit" style="padding: 10px; margin:30px; margin-bottom:10px; border-radius:50px;" class="btnSubmit"></center>
+                </form>
 </div>
+
+
+
+
+
 
 {% endblock %}

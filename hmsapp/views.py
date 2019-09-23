@@ -18,6 +18,7 @@ def homepage(request):
         current_doc = data.cdoc
         data_visit = Visits.objects.get(id = current_doc)
         data_case = Case.objects.get(id = data_visit.case_id)
+        data_all_visits = Visits.objects.filter(case = data_case)
         data_patient = User.objects.get(id = data_case.user_id)
         patient_profile = UserProfile.objects.get(user = data_case.user)
         patient_history = UserHistory.objects.get(user = data_case.user)
@@ -27,6 +28,7 @@ def homepage(request):
             "visit":data_visit,
             "patient":data_patient,
             "case":data_case,
+            "visits_of_case":data_all_visits,
         }
         return render(request, "doctorhome.html", context)  
 
@@ -259,14 +261,15 @@ def save_doc(request):
 
 @login_required
 def visit_info(request):
-    visit = request.POST.get("visit")
+    visit = request.POST.get("dropdown2")
+    print(visit)
     data = Visits.objects.get(id = visit)
     data_lab = Labs.objects.get(visit = visit)
     data_medic = Medic.objects.get(visit = visit)
     lab_list = data_lab.test.split('\n')
     medicine_list = data_medic.medicines.split('\n')
     context = {"visit":data,
-    "medicine":medicine_list,
+    "medicines":medicine_list,
     "lab":lab_list}
     return render(request, "visitinfo.html", context)  
 
