@@ -7,6 +7,13 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title> registration form</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script>$('.datepicker').pickadate();</script>
+<script src={% static "signup.js" %}></script>
 {% endblock %}
 
 {% block body %}
@@ -70,7 +77,37 @@
                                         
                                     </div>
                                     <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Birth date *" value="" name="birth_date" required id="id_birth_date">
+                                            
+                                                    
+                                                                
+                                                                    
+                                                                            <div class='input-group date' id='datepicker'>
+                                                                                    <input type="text" class="form-control" placeholder="Birth date *" value="" name="birth_date" required id="id_birth_date">
+                                                                                <span class="input-group-addon">
+                                                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                                                </span>
+                                                                            </div>
+                                                                       
+                                                        
+                                                        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+                                                        <script >
+                                                            $(function () {
+                                                                $('#datepicker').datepicker({
+                                                                    format: "yyyy-mm-dd",
+                                                                    autoclose: true,
+                                                                    todayHighlight: true,
+                                                                    showOtherMonths: true,
+                                                                    selectOtherMonths: true,
+                                                                    autoclose: true,
+                                                                    changeMonth: true,
+                                                                    changeYear: true,
+                                                                    orientation: "button"
+                                                                });
+                                                            });
+                                                        </script>
+                                                  
+                                               
+                                            <!-- <input type="text" class="form-control" placeholder="Birth date *" value="" name="birth_date" required id="id_birth_date"> -->
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="city" maxlength="10" required id="id_city" placeholder="Enter Your City *" value="" >
@@ -82,6 +119,8 @@
                 </div>
 
 
-
+<script type="text/javascript">
+$('.datepicker').pickadate();
+</script>
 
 {% endblock %}

@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p><label for="id_current_status" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Current status:</label> <input type="text" class="form-control" name="current_status" maxlength="60" required id="id_current_status"></p>
-<p><label for="id_time" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Time:</label> <input class="form-control" type="text" name="time" value="00:00" required id="id_time"></p>
+<p><label for="id_time" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Time:</label> <input class="form-control" id = "datetimepicker3" type="text" name="time" value="00:00" required></p>
     
     <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Existing cases:</label>
     <select class="form-control" id="exampleFormControlSelect1" name="dropdown1">
@@ -48,9 +48,6 @@
             </div>
 </form>
 </div>
-
-
-
 
 {% endblock %}
 

@@ -1,11 +1,62 @@
 {% extends "home.html" %}
 
 {% block head %}
+{% load static %}
 <title>Visit Info</title>
+<link href = {% static "medic_lab.css" %} rel = "stylesheet" type = "text/css">
 {% endblock %}
 
 {% block body %}
-<div class="container"><h1>Visit Information</h1>
+<body  background={% static "gradient.jpg" %} >
+    <div class="container" style="padding-top: 20px; background-color: white;" >
+
+        
+            <div class="container register-form" style = "margin-top: 20px;">
+                <div class="form">
+                    <div class="note">
+                        <p style = "font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: 30px;">Visit Information</p>
+                    </div>
+                    <div class="form-content">
+                            
+                            
+                    
+                        <div class="row">
+                            <div class="col-md-12">
+                                    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Patient Status:</label><input class="form-control" value=" {{ visit.current_status }}" style="border-radius: 40px; text-transform: capitalize;" disabled></p>
+                                    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Patient Progress:</label><input class="form-control" value=" {{ visit.progress }}" style="border-radius: 40px; text-transform: capitalize;" disabled></p>
+                                    
+    {% for medicine in medicines %}
+    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Medicines:</label><textarea rows="2" class="form-control" value="{{medicine}}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
+    {% endfor %}
+    
+    {% for test in lab %}
+    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Tests:</label><textarea rows="2" class="form-control" value="{{test}}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
+    {% endfor %}
+                                    
+                                    
+                            </div>
+                        </div><br>
+                        <center>
+                                
+<a class="btnSubmit btn" href="/" role="button">Back</a>
+                                
+                                
+                            
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="container"><h1>Visit Information</h1>
     <h1 class="container">Visit info:</h1>
     {{ visit.current_status }}
     {{ visit.progress }}
@@ -17,5 +68,5 @@
     {% for test in lab %}
     {{test}}
     {% endfor %}
-</div>
+</div> -->
 {% endblock %}

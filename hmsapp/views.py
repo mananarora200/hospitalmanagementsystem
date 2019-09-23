@@ -14,48 +14,60 @@ def homepage(request):
     if data.role == "patient":
         return render(request,'patienthome.html')
     elif data.role == "doctor":
-        data = Current.objects.get(id = 1)
-        current_doc = data.cdoc
-        data_visit = Visits.objects.get(id = current_doc)
-        data_case = Case.objects.get(id = data_visit.case_id)
-        data_all_visits = Visits.objects.filter(case = data_case)
-        data_patient = User.objects.get(id = data_case.user_id)
-        patient_profile = UserProfile.objects.get(user = data_case.user)
-        patient_history = UserHistory.objects.get(user = data_case.user)
-        context = {
-            "profile":patient_profile,
-            "history":patient_history,
-            "visit":data_visit,
-            "patient":data_patient,
-            "case":data_case,
-            "visits_of_case":data_all_visits,
-        }
-        return render(request, "doctorhome.html", context)  
+        try:
+            data = Current.objects.get(id = 1)
+            current_doc = data.cdoc
+            data_visit = Visits.objects.get(id = current_doc)
+            data_case = Case.objects.get(id = data_visit.case_id)
+            data_all_visits = Visits.objects.filter(case = data_case)
+            data_patient = User.objects.get(id = data_case.user_id)
+            patient_profile = UserProfile.objects.get(user = data_case.user)
+            patient_history = UserHistory.objects.get(user = data_case.user)
+            context = {
+                "profile":patient_profile,
+                "history":patient_history,
+                "visit":data_visit,
+                "patient":data_patient,
+                "case":data_case,
+                "visits_of_case":data_all_visits,
+            }
+            return render(request, "doctorhome.html", context)  
+        except:
+            return render(request, "except.html")
 
     elif data.role == "medic":
-        data=Current.objects.get(id=1)
-        current_medic=data.cmedic
-        data_new=Medic.objects.get(id=current_medic)
-        medicine_list = data_new.medicines.split('\n')
-        context= {'medicine': medicine_list,}
-        return render(request,'medicine.html',context)
+        try:
+            data=Current.objects.get(id=1)
+            current_medic=data.cmedic
+            data_new=Medic.objects.get(id=current_medic)
+            medicine_list = data_new.medicines.split('\n')
+            context= {'medicine': medicine_list,}
+            return render(request,'medicine.html',context)
+        except:
+            return render(request, "except.html")
     
     elif data.role == "lab":
-        data=Current.objects.get(id=1)
-        current_lab=data.clab
-        data_new=Labs.objects.get(id=current_lab)
-        lab_list = data_new.test.split('\n')
-        context= {'lab':lab_list,}
-        return render(request,'lab.html',context)
+        try:
+            data=Current.objects.get(id=1)
+            current_lab=data.clab
+            data_new=Labs.objects.get(id=current_lab)
+            lab_list = data_new.test.split('\n')
+            context= {'lab':lab_list,}
+            return render(request,'lab.html',context)
+        except:
+            return render(request, "except.html")
     
-    elif data.role == "mediocar":
-        data=Current.objects.get(id=1)
-        current_visit=data.cvisit
-        data_new=Visits.objects.get(id=current_visit)
-        context= {'case':data_new.case,
-        }
-        return render(request,'mediocar.html',context)      
-    
+    elif data.role == "mediocre":
+        try:
+            data=Current.objects.get(id=1)
+            current_visit=data.cvisit
+            data_new=Visits.objects.get(id=current_visit)
+            context= {'case':data_new.case,
+            }
+            return render(request,'mediocre.html',context)      
+        except:
+            return render(request, "except.html")
+        
 
 @login_required
 def showpatienthistory(request):
@@ -204,7 +216,7 @@ def save_medic(request):
     current_medic=current_medic+1
     data.cmedic=current_medic
     data.save()
-    return render(request,'save_medic.html')
+    return redirect("/")
 
 @login_required
 def save_lab(request):
@@ -221,11 +233,11 @@ def save_lab(request):
     current_lab=current_lab+1
     data.clab=current_lab
     data.save()
-    return render(request,'save_lab.html')
+    return redirect("/")
 
 
 @login_required    
-def save_mediocar(request):
+def save_mediocre(request):
     data=Current.objects.get(id=1)
     temperature=request.POST.get('temperature')
     bp=request.POST.get('bp')
@@ -237,7 +249,7 @@ def save_mediocar(request):
     current_visit=current_visit+1
     data.cvisit=current_visit
     data.save()
-    return render(request,'save_mediocar.html')   
+    return redirect("/")   
  
 
 @login_required
@@ -257,7 +269,7 @@ def save_doc(request):
     current_doc = current_visit + 1
     data.cdoc = current_doc
     data.save()
-    return render(request,'save_doc.html')
+    return redirect("/")
 
 @login_required
 def visit_info(request):
@@ -271,6 +283,6 @@ def visit_info(request):
     context = {"visit":data,
     "medicines":medicine_list,
     "lab":lab_list}
-    return render(request, "visitinfo.html", context)  
+    return redirect("/")  
 
 
