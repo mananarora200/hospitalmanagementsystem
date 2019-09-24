@@ -22,11 +22,11 @@
             </div>
         </div>
     </div> 
-    <div id="products" class="row view-group" >
+    <div id="products" class="row view-group" style="margin-bottom: 0px;" >
                 <div class="item col-xs-6 col-lg-6" >
                     <div class="thumbnail card" style="border-radius: 20px;">
                         
-                        <div class="caption card-body">
+                        <div class="caption card-body" style="margin-bottom: 8px;">
                             <center><h4 class="group card-title inner list-group-item-heading">
                                 Patient Information</h4></center><br>
                                 <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Patient Name:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ patient.first_name }} {{ patient.last_name }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
@@ -49,17 +49,19 @@
                             <label style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Blood Pressure:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" value=" {{ visit.bp }}" style="width: 100%; text-transform: capitalize; border-radius: 20px;" disabled></span><br>
                             <label for="exampleFormControlSelect1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;">Existing Visits:</label>
    <span style="display: block; overflow: hidden;padding: 0 4px 0 6px;" > <form method="POST" action="visitinfo">
-       {% csrf_token %}
+    <form action="visitinfo" method="POST">   
+    {% csrf_token %}
     <select class="form-control" style="border-radius: 20px;" id="exampleFormControlSelect1" name="dropdown2">
          {% for visit in visits_of_case %}
           <option value="{{ visit.id }}">
                 {{ visit.date }}
           </option>
-          {% endfor %}</select></span><center><input type="submit" value="Submit" class="btnSubmit" style=" padding: 5px 20px 5px 9px;  margin:20px 0px ;"></center>
+          {% endfor %}</select></span><center><input type="submit" value="Submit" class="btnSubmit" style=" padding: 5px 20px 5px 9px;  margin:5px 0px ; margin-bottom: 0px;"></center>
         </form> </div>
                                 <form method="POST" action="save_doc">
-                                    {% csrf_token %}<div class="form-group" style="margin-left: 20px; margin-right: 20px;">
+                                    {% csrf_token %}<div class="form-group" style="margin-left: 20px; margin-right: 20px; margin-bottom: 0px; ">
                                     <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Disease:</label><span style=" display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" type="text" name="disease" style="width: 100%; border-radius: 20px;" ></span><br>
+                                    <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Progress:</label><span style=" display: block; overflow: hidden;padding: 0 4px 0 6px"><input class="form-control" type="text" name="progress" style="width: 100%; border-radius: 20px;" ></span><br>
                                     
                                     <label for="exampleFormControlTextarea1" style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 20px; float: left;" >Medicine:</label><span style="display: block; overflow: hidden;padding: 0 4px 0 6px"><textarea id="exampleFormControlTextarea1" class="form-control" type="text" rows="2" name="medicines" style="width: 100%; border-radius: 20px;" ></textarea></span><br>
                                     </div>
