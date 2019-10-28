@@ -52,7 +52,8 @@ def homepage(request):
             current_lab=data.clab
             data_new=Labs.objects.get(id=current_lab)
             lab_list = data_new.test.split('\n')
-            data_new1=Visits.objects.get(id=current_visit)
+            
+            data_new1=Visits.objects.get(id=current_lab)
             context= {'lab':lab_list,'case':data_new1.case,}
             return render(request,'lab.html',context)
         except:
