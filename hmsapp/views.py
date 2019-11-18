@@ -278,15 +278,17 @@ def save_doc(request):
 @login_required
 def visit_info(request):
     visit = request.POST.get("dropdown2")
-    print(visit)
     data = Visits.objects.get(id = visit)
     data_lab = Labs.objects.get(visit = visit)
     data_medic = Medic.objects.get(visit = visit)
     lab_list = data_lab.test.split('\n')
     medicine_list = data_medic.medicines.split('\n')
-    context = {"visit":data,
-    "medicines":medicine_list,
-    "lab":lab_list,}
+    meds = "\n".join(medicine_list)
+    tests = "\n".join(lab_list)
+    m_rows = len(medicine_list)
+    l_rows = len(lab_list)
+    context = {"visit":data, "medicines":str(meds), "lab":str(tests),"m_rows":int(m_rows),"l_rows":int(l_rows),}
+    print(context["lab"])
     return render(request,"visitinfo.html",context)  
 
 

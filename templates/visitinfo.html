@@ -25,13 +25,13 @@
                                     <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Patient Status:</label><input class="form-control" value=" {{ visit.current_status }}" style="border-radius: 40px; text-transform: capitalize;" disabled></p>
                                     <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Patient Progress:</label><input class="form-control" value=" {{ visit.progress }}" style="border-radius: 40px; text-transform: capitalize;" disabled></p>
                                     
-    {% for medicine in medicines %}
-    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Medicines:</label><textarea rows="2" class="form-control" value="{{medicine}}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
-    {% endfor %}
+
+    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Medicines:</label><textarea rows="{{ m_rows }}" class="form-control" placeholder="{{ medicines }}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
+
     
-    {% for test in lab %}
-    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Tests:</label><textarea rows="2" class="form-control" value="{{test}}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
-    {% endfor %}
+
+    <p><label style="font-family: Verdana, Geneva, Tahoma, sans-serif;" >Previous Tests:</label><textarea rows="{{ l_rows }}" class="form-control" placeholder="{{ lab }}" style="border-radius: 40px; text-transform: capitalize;" disabled></textarea></p>
+    
                                     
                                     
                             </div>
