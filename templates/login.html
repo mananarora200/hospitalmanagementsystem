@@ -16,6 +16,15 @@
 {% endblock %}
 
 {% block body %}
+{% for message in messages %}
+
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+
+                        {{ message }}
+
+                    </div>
+            {% endfor %}
 <body  background={% static "login.png" %} style="background-repeat: no-repeat; background-size: cover; background-position: center center;">
 
 
