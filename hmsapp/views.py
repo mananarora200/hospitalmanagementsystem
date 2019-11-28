@@ -126,7 +126,7 @@ def signup(request):
             login(request, user)
             return redirect('patienthistory')
         else:
-            messages.error(request, "either this phone number is already register or your password and repeat password does not match")    
+            messages.error(request, "Either this phone number is already register or your password and repeat password does not match")    
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
